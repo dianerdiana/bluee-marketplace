@@ -4,16 +4,70 @@
   --font-lexend: 'Lexend Deca', sans-serif;
   --font-mons: 'Montserrat', sans-serif;
   --default-font-family: 'Lexend Deca', sans-serif;
+  --color-primary: #1053d5;
   --color-back: #f3f5f9;
   --color-dark: #292d32;
   --color-secondary: #6a7686;
 }
 
-.bg-image-overlay {
-  background-image: linear-gradient(
-    to bottom,
-    rgba(14, 22, 38, 0) 0%,
-    rgba(14, 22, 38, 0.75) 50%,
-    rgba(14, 22, 38, 1) 100%
-  );
+@layer utilities {
+  .bg-image-overlay {
+    background-image: linear-gradient(
+      to bottom,
+      rgba(14, 22, 38, 0) 0%,
+      rgba(14, 22, 38, 0.75) 50%,
+      rgba(14, 22, 38, 1) 100%
+    );
+  }
+}
+
+@utility row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@utility flex-col-1 {
+  width: 8.333%;
+}
+@utility flex-col-2 {
+  width: 16.666%;
+}
+@utility flex-col-3 {
+  width: 25%;
+}
+@utility flex-col-4 {
+  width: 33.333%;
+}
+@utility flex-col-5 {
+  width: 41.666%;
+}
+@utility flex-col-6 {
+  width: 50%;
+}
+@utility flex-col-7 {
+  width: 58.333%;
+}
+@utility flex-col-8 {
+  width: 66.666%;
+}
+@utility flex-col-9 {
+  width: 75%;
+}
+@utility flex-col-10 {
+  width: 83.333%;
+}
+@utility flex-col-11 {
+  width: 91.666%;
+}
+@utility flex-col-12 {
+  width: 100%;
+}
+
+input[type='checkbox']:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 0;
+  left: 2px;
+  font-size: 14px;
+  color: white;
 }

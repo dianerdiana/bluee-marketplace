@@ -1,7 +1,7 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
-import path from "path";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import path from 'path';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -12,15 +12,17 @@ export default defineConfig({
     strictPort: true,
     hmr: true,
     cors: {
-      origin: "*",
-      methods: ["GET", "PATCH", "PUT", "POST", "DELETE", "OPTIONS"],
-      allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+      origin: '*',
+      methods: ['GET', 'PATCH', 'PUT', 'POST', 'DELETE', 'OPTIONS'],
+      allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
     },
   },
   resolve: {
     alias: {
-      "@/*": path.resolve(__dirname, "./src"),
-      "@/components": path.resolve(__dirname, "./src/components"),
+      '@/*': path.resolve(__dirname, './src'),
+      '@/components': path.resolve(__dirname, './src/components'),
+      '@/configs': path.resolve(__dirname, './src/configs'),
+      '@/schemas': path.resolve(__dirname, './src/schemas'),
     },
   },
 });

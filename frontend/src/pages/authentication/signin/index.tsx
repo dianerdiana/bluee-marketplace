@@ -1,11 +1,43 @@
-import Rating from '@/components/Rating';
-import { ArrowCircleLeft, ArrowCircleRight, Icon, Sms } from 'iconsax-reactjs';
+// Routing
+import { Link } from 'react-router-dom';
+
+// Custom Components
+import { IconWrapper, InputWrapper, BaseInput, InputMessage } from '@/components/Input';
+import { Label } from '@/components/Label';
+import { DynamicIcon } from '@/components/DynamicIcon';
+import { Rating } from '@/components/Rating';
+import { Button } from '@/components/Button';
+import { Checkbox } from '@/components/Checkbox';
+
+// Thirparty
+import { ArrowCircleLeft, ArrowCircleRight } from 'iconsax-reactjs';
+import { Controller, useForm } from 'react-hook-form';
+
+// Utils
+import { loginSchema, type LoginSchema } from '@/schemas/login.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignInPage = () => {
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  const onSubmit = (data: LoginSchema) => {
+    console.log('Form submitted:', data);
+  };
+
   return (
-    <main className='flex flex-wrap justify-between w-full h-screen mx-auto bg-back'>
+    <main className='justify-between w-full h-screen mx-auto row bg-back'>
       <section
-        className='relative w-6/12 flex flex-col justify-end'
+        className='relative flex-col justify-end hidden flex-col-6 lg:row'
         style={{
           backgroundImage: "url('https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/auth-image-1.png')",
           backgroundRepeat: 'no-repeat',
@@ -21,7 +53,7 @@ const SignInPage = () => {
             “Moving my business online truly made 🎯 growth and daily management much simpler, more efficient, and
             hassle-free.”
           </p>
-          <div className='flex justify-between items-center'>
+          <div className='flex items-center justify-between'>
             <dl className='text-white'>
               <dt className='font-semibold'>Jasmine Putri</dt>
               <dd>Business Owner</dd>
@@ -37,49 +69,93 @@ const SignInPage = () => {
           </div>
         </div>
       </section>
-      <section className='w-6/12 h-full flex items-center justify-center'>
-        <div className='bg-white px-6 py-6 flex flex-col justify-center h-11/12 mx-8 w-full rounded-[20px]'>
-          <div className='flex items-center justify-center text-3xl mb-10'>
+      <section className='flex items-center justify-center h-full lg:flex-col-6 flex-col-12'>
+        <div className='bg-white px-6 py-6 flex flex-col justify-center h-11/12 lg:mx-8 mx-4 w-full rounded-[20px]'>
+          <div className='flex items-center justify-center mb-14 lg:mb-6'>
             <img
               src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/logo/logo-brand.svg'
-              className='w-11 h-auto'
+              className='h-auto w-11'
             />
-            <h1 className='font-mons font-black'>BLUEE</h1>
-          </div>
-          <div className='space-y-3 mb-8'>
-            <p className='text-center font-bold text-2xl text-dark'>Hey🙌🏻, Welcome Back!</p>
-            <p className='text-center text-secondary'>Login to your account to continue!</p>
+            <h1 className='text-2xl font-black font-mons'>BLUEE</h1>
           </div>
 
-          <form className='w-full'>
-            <div className='w-full'>
-              <label htmlFor='email' className='block'>
-                Email Address
-              </label>
-              <div className='flex items-center gap-3 p-[16px_12px] border border-blue-100 rounded-xl focus-within:border-blue-500 transition-all duration-300'>
-                <div className='w-6 h-6 flex shrink-0'>
-                  <Sms size={24} />
-                  <Icon name='Sms' />
+          <div className='hidden mb-8 space-y-1 lg:block'>
+            <p className='text-xl font-bold text-center text-dark'>Hey🙌🏻, Welcome Back!</p>
+            <p className='text-sm text-center text-secondary'>Login to your account to continue!</p>
+          </div>
+
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className='mb-6 row'>
+              <div className='mb-4 flex-col-12'>
+                <Label htmlFor='email'>Email Address</Label>
+                <InputWrapper isInvalid={errors.email && true}>
+                  <IconWrapper>
+                    <DynamicIcon name='Sms' size={24} className='text-secondary' />
+                  </IconWrapper>
+                  <span className='w-px h-5 bg-secondary' />
+                  <Controller
+                    name='email'
+                    control={control}
+                    render={({ field }) => (
+                      <BaseInput
+                        autoComplete='email'
+                        id='email'
+                        type='text'
+                        placeholder='Enter Your Email'
+                        {...field}
+                      />
+                    )}
+                  />
+                </InputWrapper>
+
+                <InputMessage className={errors.email ? 'inline-block' : 'hidden'}>
+                  {errors.email?.message}
+                </InputMessage>
+              </div>
+
+              <div className='mb-10 lg:mb-4 flex-col-12'>
+                <Label htmlFor='password'>Password</Label>
+                <InputWrapper isInvalid={errors.password && true}>
+                  <IconWrapper>
+                    <DynamicIcon name='Key' size={24} className='text-secondary' />
+                  </IconWrapper>
+                  <span className='w-px h-5 bg-secondary' />
+                  <Controller
+                    name='password'
+                    control={control}
+                    render={({ field }) => (
+                      <BaseInput id='password' type='password' placeholder='Enter Your Password' {...field} />
+                    )}
+                  />
+                </InputWrapper>
+                <InputMessage className={errors.password ? 'inline-block' : 'hidden'}>
+                  {errors.password?.message}
+                </InputMessage>
+              </div>
+
+              <div className='items-center justify-between flex-col-12 row'>
+                <div className='flex items-center'>
+                  <Checkbox id='remember' name='remember' />
+                  <Label htmlFor='remember' className='m-0 cursor-pointer ms-1'>
+                    Remember Me
+                  </Label>
                 </div>
-                <input
-                  type='email'
-                  className='appearance-none outline-none w-full text-sm placeholder:text-blue-100border-blue-100 tracking-[0.35px]'
-                  placeholder='Your email address'
-                />
+                <Link to='/' className='text-secondary'>
+                  Reset Password
+                </Link>
               </div>
             </div>
             <div>
-              <label htmlFor='password'>Password</label>
-              <input id='password' name='password' type='password' />
+              <Button type='submit' variant='primary' className='w-full py-4 mb-3 rounded-full'>
+                Sign In
+              </Button>
+              <p className='text-center text-secondary'>
+                Don't have an account?{' '}
+                <Link to='/register' className='underline text-primary hover:text-blue-500'>
+                  Create Account
+                </Link>
+              </p>
             </div>
-            <div className='flex'>
-              <input id='remember' name='remember' type='checkbox' />
-              <a href='/'>Reset Password</a>
-            </div>
-            <button>Sign In</button>
-            <p>
-              Don't have an account? <a href='/register'>Create Account</a>
-            </p>
           </form>
         </div>
       </section>
