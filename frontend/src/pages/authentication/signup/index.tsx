@@ -7,37 +7,39 @@ import { Label } from '@/components/Label';
 import { DynamicIcon } from '@/components/DynamicIcon';
 import { Rating } from '@/components/Rating';
 import { Button } from '@/components/Button';
-import { Checkbox } from '@/components/Checkbox';
 
 // Thirparty
 import { ArrowCircleLeft, ArrowCircleRight } from 'iconsax-reactjs';
 import { Controller, useForm } from 'react-hook-form';
 
 // Utils
-import { loginSchema, type LoginSchema } from '@/schemas/auth.schema';
+import { signUpSchema, type SignUpSchema } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-const SignInPage = () => {
+const SignUpPage = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignUpSchema>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
+      fullName: '',
       email: '',
+      phoneNumber: '',
       password: '',
+      confirmPassword: '',
     },
   });
 
-  const onSubmit = (data: LoginSchema) => {
+  const onSubmit = (data: SignUpSchema) => {
     console.log('Form submitted:', data);
   };
 
   return (
-    <main className='justify-between w-full h-screen mx-auto row bg-back'>
+    <main className='justify-between w-full h-full min-h-screen mx-auto row bg-back'>
       <section
-        className='relative flex-col justify-end hidden flex-col-6 lg:row'
+        className='relative flex-col justify-end hidden h-screen flex-col-6 lg:row'
         style={{
           backgroundImage: "url('https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/auth-image-1.png')",
           backgroundRepeat: 'no-repeat',
@@ -55,8 +57,8 @@ const SignInPage = () => {
           </p>
           <div className='flex items-center justify-between'>
             <dl className='text-white'>
-              <dt className='font-semibold'>Jasmine Putri</dt>
-              <dd>Business Owner</dd>
+              <dd className='font-semibold'>Jasmine Putri</dd>
+              <dt>Business Owner</dt>
             </dl>
             <div className='flex items-center gap-x-1.5'>
               <button className='text-white cursor-pointer'>
@@ -69,7 +71,7 @@ const SignInPage = () => {
           </div>
         </div>
       </section>
-      <section className='flex items-center justify-center h-full lg:flex-col-6 flex-col-12'>
+      <section className='flex items-center self-center justify-center flex-1 h-full py-4 lg:flex-col-6 flex-col-12'>
         <div className='bg-white px-6 py-6 flex flex-col justify-center h-11/12 lg:mx-8 mx-4 w-full rounded-[20px]'>
           <div className='flex items-center justify-center mb-14 lg:mb-6'>
             <img
@@ -80,12 +82,39 @@ const SignInPage = () => {
           </div>
 
           <div className='hidden mb-8 space-y-1 lg:block'>
-            <p className='text-xl font-bold text-center text-dark'>Hey🙌🏻, Welcome Back!</p>
-            <p className='text-sm text-center text-secondary'>Login to your account to continue!</p>
+            <p className='text-xl font-bold text-center text-dark'>Hey🙌🏻, Welcome Aboard!</p>
+            <p className='text-sm text-center text-secondary'>Create account to continue!</p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className='mb-6 row'>
+              <div className='mb-4 flex-col-12'>
+                <Label htmlFor='fullName'>Full Name</Label>
+                <InputWrapper isInvalid={errors.fullName && true}>
+                  <IconWrapper>
+                    <DynamicIcon name='ProfileCircle' size={24} className='text-secondary' />
+                  </IconWrapper>
+                  <span className='w-px h-5 bg-secondary' />
+                  <Controller
+                    name='fullName'
+                    control={control}
+                    render={({ field }) => (
+                      <BaseInput
+                        autoComplete='name'
+                        id='fullName'
+                        type='text'
+                        placeholder='Enter Your Full Name'
+                        {...field}
+                      />
+                    )}
+                  />
+                </InputWrapper>
+
+                <InputMessage className={errors.fullName ? 'inline-block' : 'hidden'}>
+                  {errors.fullName?.message}
+                </InputMessage>
+              </div>
+
               <div className='mb-4 flex-col-12'>
                 <Label htmlFor='email'>Email Address</Label>
                 <InputWrapper isInvalid={errors.email && true}>
@@ -100,7 +129,7 @@ const SignInPage = () => {
                       <BaseInput
                         autoComplete='email'
                         id='email'
-                        type='text'
+                        type='email'
                         placeholder='Enter Your Email'
                         {...field}
                       />
@@ -113,7 +142,34 @@ const SignInPage = () => {
                 </InputMessage>
               </div>
 
-              <div className='mb-10 lg:mb-4 flex-col-12'>
+              <div className='mb-4 flex-col-12'>
+                <Label htmlFor='phoneNumber'>Phone Number</Label>
+                <InputWrapper isInvalid={errors.phoneNumber && true}>
+                  <IconWrapper>
+                    <DynamicIcon name='Call' size={24} className='text-secondary' />
+                  </IconWrapper>
+                  <span className='w-px h-5 bg-secondary' />
+                  <Controller
+                    name='phoneNumber'
+                    control={control}
+                    render={({ field }) => (
+                      <BaseInput
+                        autoComplete='name'
+                        id='phoneNumber'
+                        type='text'
+                        placeholder='Enter Your Phone Number'
+                        {...field}
+                      />
+                    )}
+                  />
+                </InputWrapper>
+
+                <InputMessage className={errors.phoneNumber ? 'inline-block' : 'hidden'}>
+                  {errors.phoneNumber?.message}
+                </InputMessage>
+              </div>
+
+              <div className='mb-4 flex-col-12'>
                 <Label htmlFor='password'>Password</Label>
                 <InputWrapper isInvalid={errors.password && true}>
                   <IconWrapper>
@@ -128,31 +184,46 @@ const SignInPage = () => {
                     )}
                   />
                 </InputWrapper>
+
                 <InputMessage className={errors.password ? 'inline-block' : 'hidden'}>
                   {errors.password?.message}
                 </InputMessage>
               </div>
 
-              <div className='items-center justify-between flex-col-12 row'>
-                <div className='flex items-center'>
-                  <Checkbox id='remember' name='remember' />
-                  <Label htmlFor='remember' className='m-0 cursor-pointer ms-1'>
-                    Remember Me
-                  </Label>
-                </div>
-                <Link to='/' className='text-secondary'>
-                  Reset Password
-                </Link>
+              <div className='mb-4 flex-col-12'>
+                <Label htmlFor='password'>Confirm Password</Label>
+                <InputWrapper isInvalid={errors.confirmPassword && true}>
+                  <IconWrapper>
+                    <DynamicIcon name='Key' size={24} className='text-secondary' />
+                  </IconWrapper>
+                  <span className='w-px h-5 bg-secondary' />
+                  <Controller
+                    name='confirmPassword'
+                    control={control}
+                    render={({ field }) => (
+                      <BaseInput
+                        id='confirmPassword'
+                        type='password'
+                        placeholder='Enter Your Confirm Password'
+                        {...field}
+                      />
+                    )}
+                  />
+                </InputWrapper>
+
+                <InputMessage className={errors.confirmPassword ? 'inline-block' : 'hidden'}>
+                  {errors.confirmPassword?.message}
+                </InputMessage>
               </div>
             </div>
             <div>
               <Button type='submit' variant='primary' className='w-full py-4 mb-3 rounded-full'>
-                Sign In
+                Create Account
               </Button>
               <p className='text-center text-secondary'>
-                Don't have an account?{' '}
-                <Link to='/register' className='underline text-primary hover:text-blue-500'>
-                  Create Account
+                Already have an account?{' '}
+                <Link to='/signin' className='underline text-primary hover:text-blue-500'>
+                  Sign In
                 </Link>
               </p>
             </div>
@@ -163,4 +234,4 @@ const SignInPage = () => {
   );
 };
 
-export default SignInPage;
+export default SignUpPage;
