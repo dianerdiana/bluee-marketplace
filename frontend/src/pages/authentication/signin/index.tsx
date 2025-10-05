@@ -14,7 +14,7 @@ import { ArrowCircleLeft, ArrowCircleRight } from 'iconsax-reactjs';
 import { Controller, useForm } from 'react-hook-form';
 
 // Utils
-import { loginSchema, type LoginSchema } from '@/schemas/auth.schema';
+import { signInSchema, type SignInSchema } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignInPage = () => {
@@ -22,15 +22,15 @@ const SignInPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
+  } = useForm<SignInSchema>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onSubmit = (data: LoginSchema) => {
+  const onSubmit = (data: SignInSchema) => {
     console.log('Form submitted:', data);
   };
 
@@ -151,7 +151,7 @@ const SignInPage = () => {
               </Button>
               <p className='text-center text-secondary'>
                 Don't have an account?{' '}
-                <Link to='/register' className='underline text-primary hover:text-blue-500'>
+                <Link to='/signup' className='underline text-primary hover:text-blue-500'>
                   Create Account
                 </Link>
               </p>

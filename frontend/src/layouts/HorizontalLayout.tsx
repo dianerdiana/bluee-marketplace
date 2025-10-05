@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 
-function App() {
+const BlankLayout = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -18,6 +18,6 @@ function App() {
       <Outlet />
     </Suspense>
   );
-}
+};
 
-export default App;
+export default BlankLayout;
