@@ -71,6 +71,6 @@ input[type='checkbox']:checked::after {
   color: white;
 }
 
-@components container {
-  max-width: 1216px;
+.app-container {
+  @apply container px-4 mx-auto md:px-0;
 }

@@ -8,7 +8,8 @@
       "@components/*": ["./src/components/*"],
       "@configs/*": ["./src/configs/*"],
       "@schemas/*": ["./src/schemas/*"],
-      "@layouts/*": ["./src/layouts/*"]
+      "@layouts/*": ["./src/layouts/*"],
+      "@assets/*": ["./src/assets/*"]
     }
   }
 }

@@ -4,7 +4,14 @@ import { DynamicIcon } from '@/components/DynamicIcon';
 import { BaseInput, InputWrapper, IconWrapper } from '@/components/Input';
 import type { IconName } from '@/types/iconNames';
 import { Suspense } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useSearchParams } from 'react-router-dom';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination } from 'swiper/modules';
+import { cn } from '@/configs/cn';
+
+// Import Swiper styles
+import 'swiper/swiper-bundle.css';
+import '@/assets/css/swiper.css';
 
 type NavLink = {
   id: string;
@@ -75,73 +82,110 @@ const companyFooterNavLinks = [
 ];
 
 const HorizontalLayout = () => {
+  const [params, setParams] = useSearchParams();
+  const search = params.get('search') || '';
+
   return (
     <Suspense fallback={null}>
-      <header className='py-8 bg-white'>
-        <div className='container items-center justify-between mx-auto mb-8 row'>
-          <div className='flex-col-2'>
-            <BrandImage />
+      <header className='py-4 bg-white lg:py-8'>
+        <div className='items-center justify-between mb-8 app-container row'>
+          <div className='order-1 flex-col-6 lg:flex-col-2'>
+            <BrandImage imgClassName='me-1 lg:me-3' />
           </div>
-          <form className='flex-col-8'>
+          <form
+            onSubmit={() => console.log(search)}
+            className='order-3 mt-3 lg:mt-0 flex-col-12 lg:flex-col-8 lg:order-2'
+          >
             <InputWrapper>
               <IconWrapper>
                 <DynamicIcon name='SearchNormal1' />
               </IconWrapper>
-              <BaseInput placeholder='Search any products' />
+              <BaseInput
+                id='search'
+                name='search'
+                placeholder='Search any products'
+                defaultValue={search}
+                onChange={(e) => {
+                  const value = e.target.value;
+
+                  if (value.length) {
+                    setParams({ search: value });
+                  } else {
+                    setParams('');
+                  }
+                }}
+              />
             </InputWrapper>
           </form>
-          <div className='items-center justify-end gap-3 flex-col-2 row'>
+          <div className='items-center justify-end order-2 gap-2 lg:gap-3 flex-col-6 lg:flex-col-2 row lg:order-3'>
             <Button
               variant='secondary'
-              className='bg-gray-200 rounded-full text-dark hover:text-white hover:bg-gray-400 w-14 h-14'
+              className='items-center justify-center w-10 h-10 p-2 bg-gray-200 rounded-full row text-dark hover:text-white hover:bg-gray-400 lg:w-14 lg:h-14'
             >
-              <DynamicIcon name='Notification' />
+              <DynamicIcon name='Notification' size={24} />
             </Button>
             <Button
               variant='secondary'
-              className='bg-gray-200 rounded-full text-dark hover:text-white hover:bg-gray-400 w-14 h-14'
+              className='items-center justify-center w-10 h-10 p-2 bg-gray-200 rounded-full row text-dark hover:text-white hover:bg-gray-400 lg:w-14 lg:h-14'
             >
               <DynamicIcon name='ShoppingCart' />
             </Button>
             <Button
               variant='secondary'
-              className='p-0 overflow-hidden bg-gray-200 rounded-full text-dark hover:text-white hover:bg-gray-400 w-14 h-14'
+              className='w-10 h-10 p-0 overflow-hidden bg-gray-200 rounded-full lg:w-14 lg:h-14'
             >
               <img src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/profile-1.png' alt='profile' />
             </Button>
           </div>
         </div>
-        <nav className='container mx-auto'>
-          <ul className='items-center justify-between row'>
+        <nav className='app-container'>
+          <Swiper
+            tag='ul'
+            slidesPerView='auto'
+            spaceBetween={32}
+            pagination
+            modules={[Pagination]}
+            className='justify-between row'
+          >
             {navLinks.map((navLink) => (
-              <li key={navLink.id}>
-                <NavLink
-                  to={navLink.href}
-                  className={({ isActive }) =>
-                    [
-                      'row items-center ',
-                      isActive ? 'text-primary hover:text-blue-900' : 'text-secondary hover:text-gray-900',
-                    ].join('')
-                  }
-                >
+              <SwiperSlide key={navLink.id} tag='li' className='space-x-3 !w-fit'>
+                <NavLink to={navLink.href} className='items-center row group'>
                   {({ isActive }) => (
                     <>
-                      <DynamicIcon name={navLink.icon} variant={isActive ? 'Bold' : 'Outline'} className='me-2' />
-                      <span>{navLink.title}</span>
+                      <DynamicIcon
+                        name={navLink.icon}
+                        variant={isActive ? 'Bold' : 'Outline'}
+                        className={cn(
+                          'me-2 transition-colors',
+                          isActive
+                            ? 'text-primary group-hover:text-blue-900'
+                            : 'text-secondary group-hover:text-gray-900',
+                        )}
+                      />
+                      <span
+                        className={cn(
+                          'me-2 transition-colors',
+                          isActive
+                            ? 'text-primary group-hover:text-blue-900'
+                            : 'text-secondary group-hover:text-gray-900',
+                        )}
+                      >
+                        {navLink.title}
+                      </span>
                     </>
                   )}
                 </NavLink>
-              </li>
+              </SwiperSlide>
             ))}
-          </ul>
+          </Swiper>
         </nav>
       </header>
 
       <Outlet />
 
-      <footer className='bg-white border-t-gray-400 py-14'>
-        <div className='container mx-auto row'>
-          <section className='lg:flex-col-3 flex-col-12 lg:me-20'>
+      <footer className='py-6 bg-white border-t-gray-400 lg:py-14'>
+        <div className='app-container row'>
+          <section className='mb-4 lg:flex-col-3 flex-col-12 lg:me-20 lg:mb-0'>
             <BrandImage className='mb-6' />
 
             <p className='text-secondary leading-160'>
@@ -149,11 +193,11 @@ const HorizontalLayout = () => {
               industry's standard dummy text
             </p>
           </section>
-          <section className='lg:flex-col-2 flex-col-12 lg:me-12'>
+          <section className='mb-4 lg:flex-col-2 flex-col-12 lg:me-12 lg:mb-0'>
             <h1 className='mb-4 font-semibold text-dark'>Main Menu</h1>
 
             <nav title='Nav Main Menu Footer'>
-              <ul className='space-y-4'>
+              <ul className='space-y-2 lg:space-y-4'>
                 {mainMenuFooterNavLinks.map((navLink) => (
                   <li key={navLink.id}>
                     <NavLink to={navLink.href} className='text-secondary hover:text-gray-900'>
@@ -168,7 +212,7 @@ const HorizontalLayout = () => {
             <h1 className='mb-4 font-semibold text-dark'>Company</h1>
 
             <nav title='Nav Company Footer'>
-              <ul className='space-y-4'>
+              <ul className='space-y-2 lg:space-y-4'>
                 {companyFooterNavLinks.map((navLink) => (
                   <li key={navLink.id}>
                     <NavLink to={navLink.href} className='text-secondary hover:text-gray-900'>
@@ -183,7 +227,7 @@ const HorizontalLayout = () => {
           <hr className='border-gray-400 flex-col-12 my-9' />
 
           <div className='flex-col-12'>
-            <p className='text-secondary'>@ 2025 Bluee Company. All Rights Reserved</p>
+            <p className='text-center text-secondary'>&copy; 2025 Bluee Company. All Rights Reserved</p>
           </div>
         </div>
       </footer>
