@@ -10,7 +10,7 @@ type InputMessageProps = React.HtmlHTMLAttributes<HTMLSpanElement>;
 export const InputWrapper: FC<InputWrapperProps> = ({ children, className, isInvalid = false, ...props }) => (
   <div
     className={cn(
-      'flex items-center gap-3 py-4 px-3 border border-secondary rounded-xl focus-within:ring focus-within:ring-primary focus-within:border-primary transition-all duration-300',
+      'flex items-center gap-3 py-4 px-3 border border-gray-300 rounded-xl focus-within:ring focus-within:ring-primary focus-within:border-primary transition-all duration-300',
       isInvalid
         ? 'border-red-400 ring ring-red-400 focus-within:ring focus-within:ring-red-400 focus-within:border-red-400'
         : '',

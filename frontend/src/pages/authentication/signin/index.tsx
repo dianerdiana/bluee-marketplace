@@ -13,6 +13,9 @@ import { Checkbox } from '@/components/Checkbox';
 import { ArrowCircleLeft, ArrowCircleRight } from 'iconsax-reactjs';
 import { Controller, useForm } from 'react-hook-form';
 
+// Config
+import { appConfig } from '@/configs/appConfig';
+
 // Utils
 import { signInSchema, type SignInSchema } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -72,11 +75,8 @@ const SignInPage = () => {
       <section className='flex items-center justify-center h-full lg:flex-col-6 flex-col-12'>
         <div className='bg-white px-6 py-6 flex flex-col justify-center h-11/12 lg:mx-8 mx-4 w-full rounded-[20px]'>
           <div className='flex items-center justify-center mb-14 lg:mb-6'>
-            <img
-              src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/logo/logo-brand.svg'
-              className='h-auto w-11'
-            />
-            <h1 className='text-2xl font-black font-mons'>BLUEE</h1>
+            <img src={appConfig.logoUrl} className='h-auto w-11' />
+            <h1 className='text-2xl font-black font-mons'>{appConfig.brandName}</h1>
           </div>
 
           <div className='hidden mb-8 space-y-1 lg:block'>
