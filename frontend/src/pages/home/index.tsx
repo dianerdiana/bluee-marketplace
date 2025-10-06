@@ -12,7 +12,7 @@ type CategoryType = {
   name: string;
   icon: IconName;
   totalItems: number;
-  href: string;
+  slug: string;
 };
 
 const addsList = [
@@ -27,12 +27,12 @@ const addsList = [
 ];
 
 const categories: CategoryType[] = [
-  { id: '1', href: '/home', name: 'Gadget', icon: 'Mobile', totalItems: 1294 },
-  { id: '2', href: '/home', name: 'Fitness', icon: 'Weight', totalItems: 1294 },
-  { id: '3', href: '/home', name: 'Hardware', icon: 'Devices', totalItems: 1294 },
-  { id: '4', href: '/home', name: 'Furniture', icon: 'Tree', totalItems: 1294 },
-  { id: '5', href: '/home', name: 'Electronic', icon: 'Lamp', totalItems: 1294 },
-  { id: '6', href: '/home', name: 'Kitchen', icon: 'Cup', totalItems: 1294 },
+  { id: '1', slug: 'gadget', name: 'Gadget', icon: 'Mobile', totalItems: 1294 },
+  { id: '2', slug: 'fitness', name: 'Fitness', icon: 'Weight', totalItems: 1294 },
+  { id: '3', slug: 'hardware', name: 'Hardware', icon: 'Devices', totalItems: 1294 },
+  { id: '4', slug: 'furniture', name: 'Furniture', icon: 'Tree', totalItems: 1294 },
+  { id: '5', slug: 'electronic', name: 'Electronic', icon: 'Lamp', totalItems: 1294 },
+  { id: '6', slug: 'kitchen', name: 'Kitchen', icon: 'Cup', totalItems: 1294 },
 ];
 
 const products = [
@@ -146,7 +146,7 @@ const HomePage = () => {
         </Swiper>
       </section>
 
-      <section className='mb-24 app-container'>
+      <section className='px-5 mb-24 app-container'>
         <div className='items-center justify-between pt-16 row mb-9'>
           <h1 className='mb-3 text-3xl font-extrabold break-words lg:flex-col-4 flex-col-12 lg:mb-0 text-dark'>
             Explore High Quality Products by Category
@@ -160,7 +160,7 @@ const HomePage = () => {
           {categories.map((category) => (
             <SwiperSlide key={category.id} className='!w-[180px]' tag='li'>
               <Link
-                to={category.href}
+                to={`/products?category=${category.slug}`}
                 className='flex-col items-center justify-center py-8 overflow-hidden border rounded-3xl row border-back hover:border-primary hover:inset-ring hover:inset-ring-primary hover:bg-slate-primary'
               >
                 <DynamicIcon name={category.icon} variant='Bulk' size={36} className='text-primary' />
@@ -176,7 +176,7 @@ const HomePage = () => {
       </section>
 
       <section className='bg-white'>
-        <div className='app-container'>
+        <div className='px-5 app-container'>
           <div className='items-center justify-between row mb-9'>
             <h1 className='mb-3 text-3xl font-extrabold break-words flex-col-12 lg:mb-0 lg:flex-col-3 text-dark'>
               Shop Quality Picks From Top Sellers

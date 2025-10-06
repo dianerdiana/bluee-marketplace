@@ -73,5 +73,5 @@ input[type='checkbox']:checked::after {
 }
 
 .app-container {
-  @apply container px-4 mx-auto md:px-0;
+  @apply container mx-auto;
 }

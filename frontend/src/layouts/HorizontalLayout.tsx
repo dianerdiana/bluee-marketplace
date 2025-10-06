@@ -2,7 +2,7 @@
 import { Suspense } from 'react';
 
 // Routing
-import { NavLink, Outlet, useSearchParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useSearchParams } from 'react-router-dom';
 
 // Custom Components
 import { BrandImage } from '@/components/BrandImage';
@@ -93,16 +93,16 @@ const companyFooterNavLinks = [
 ];
 
 const HorizontalLayout = () => {
-  const [params, setParams] = useSearchParams();
-  const search = params.get('search') || '';
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('search') || '';
 
   return (
     <Suspense fallback={null}>
       <header className='py-4 bg-white lg:py-8'>
-        <div className='items-center justify-between mb-8 app-container row'>
-          <div className='order-1 flex-col-6 lg:flex-col-2'>
+        <div className='items-center justify-between px-2 mb-8 md:px-0 app-container row'>
+          <Link to={'/home'} className='order-1 flex-col-6 lg:flex-col-2'>
             <BrandImage imgClassName='me-1 lg:me-3' />
-          </div>
+          </Link>
           <form
             onSubmit={() => console.log(search)}
             className='order-3 mt-3 lg:mt-0 flex-col-12 lg:flex-col-8 lg:order-2'
@@ -120,9 +120,9 @@ const HorizontalLayout = () => {
                   const value = e.target.value;
 
                   if (value.length) {
-                    setParams({ search: value });
+                    setSearchParams({ search: value });
                   } else {
-                    setParams('');
+                    setSearchParams('');
                   }
                 }}
               />
@@ -149,7 +149,7 @@ const HorizontalLayout = () => {
             </Button>
           </div>
         </div>
-        <nav className='app-container'>
+        <nav className='px-2 md:px-0 app-container'>
           <Swiper
             tag='ul'
             slidesPerView='auto'
@@ -195,7 +195,7 @@ const HorizontalLayout = () => {
       <Outlet />
 
       <footer className='py-6 bg-white border-t border-t-back lg:py-14'>
-        <div className='app-container row'>
+        <div className='px-5 app-container row'>
           <section className='mb-4 lg:flex-col-3 flex-col-12 lg:me-20 lg:mb-0'>
             <BrandImage className='mb-6' />
 
