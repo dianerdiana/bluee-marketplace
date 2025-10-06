@@ -3,7 +3,7 @@ import { cn } from '@/configs/cn';
 
 type BrandImageProps = React.HTMLAttributes<HTMLDivElement>;
 
-const BrandImage: React.FC<BrandImageProps & { imgClassName?: string; brandClassName?: string }> = ({
+export const BrandImage: React.FC<BrandImageProps & { imgClassName?: string; brandClassName?: string }> = ({
   className,
   imgClassName,
   brandClassName,
@@ -16,5 +16,3 @@ const BrandImage: React.FC<BrandImageProps & { imgClassName?: string; brandClass
     </div>
   );
 };
-
-export default BrandImage;

@@ -8,7 +8,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({ className, ...props }) => {
     <input
       type='checkbox'
       className={cn(
-        'w-5 h-5 rounded outline-none cursor-pointer border-gray-300 text-primary focus:ring-primary',
+        'w-5 h-5 rounded outline-none cursor-pointer border-back text-primary focus:ring-primary',
         className,
       )}
       {...props}

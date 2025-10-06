@@ -1,12 +1,23 @@
-import BrandImage from '@/components/BrandImage';
+// React
+import { Suspense } from 'react';
+
+// Routing
+import { NavLink, Outlet, useSearchParams } from 'react-router-dom';
+
+// Custom Components
+import { BrandImage } from '@/components/BrandImage';
 import { Button } from '@/components/Button';
 import { DynamicIcon } from '@/components/DynamicIcon';
 import { BaseInput, InputWrapper, IconWrapper } from '@/components/Input';
-import type { IconName } from '@/types/iconNames';
-import { Suspense } from 'react';
-import { NavLink, Outlet, useSearchParams } from 'react-router-dom';
+
+// Thirdparty
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper/modules';
+
+// Types
+import type { IconName } from '@/types/iconNames';
+
+// Configs
 import { cn } from '@/configs/cn';
 
 // Import Swiper styles
@@ -183,7 +194,7 @@ const HorizontalLayout = () => {
 
       <Outlet />
 
-      <footer className='py-6 bg-white border-t-gray-400 lg:py-14'>
+      <footer className='py-6 bg-white border-t border-t-back lg:py-14'>
         <div className='app-container row'>
           <section className='mb-4 lg:flex-col-3 flex-col-12 lg:me-20 lg:mb-0'>
             <BrandImage className='mb-6' />
@@ -224,7 +235,7 @@ const HorizontalLayout = () => {
             </nav>
           </section>
 
-          <hr className='border-gray-400 flex-col-12 my-9' />
+          <hr className='border-back flex-col-12 my-9' />
 
           <div className='flex-col-12'>
             <p className='text-center text-secondary'>&copy; 2025 Bluee Company. All Rights Reserved</p>
