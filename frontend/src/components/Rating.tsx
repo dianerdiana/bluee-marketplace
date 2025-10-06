@@ -2,7 +2,7 @@ type RatingProps = {
   rating: number;
 };
 
-const Star = ({ fill }: { fill: number }) => (
+export const Star = ({ fill = 100 }: { fill: number }) => (
   <svg
     width='18'
     height='16'

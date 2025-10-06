@@ -19,7 +19,7 @@ export const Breadcrumb: React.FC<BreadcrumbProps> = ({ items }) => {
         return (
           <div key={index} className='flex items-center'>
             {!isLast && item.href ? (
-              <Link to={item.href} className='text-lg transition-colors text-primary '>
+              <Link to={item.href} className='text-lg capitalize transition-colors text-primary '>
                 {item.label}
               </Link>
             ) : (

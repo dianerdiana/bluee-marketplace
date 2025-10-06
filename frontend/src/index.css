@@ -75,3 +75,11 @@ input[type='checkbox']:checked::after {
 .app-container {
   @apply container mx-auto;
 }
+
+.ProductDescription > ul {
+  @apply list-disc list-inside ps-3;
+}
+
+.ProductDescription > ol {
+  @apply list-decimal list-inside ps-3;
+}

@@ -20,6 +20,7 @@ const HomePage = lazy(() => import('../pages/home'));
 
 // Product Pages
 const ProductListPage = lazy(() => import('../pages/products/list'));
+const ProductDetailPage = lazy(() => import('../pages/products/details'));
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
 
           // Products Page
           { path: '/products', Component: ProductListPage },
+          { path: '/products/:slug/details', Component: ProductDetailPage },
         ],
       },
     ],

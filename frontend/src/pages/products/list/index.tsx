@@ -1,10 +1,17 @@
+// Routing
+import { useSearchParams } from 'react-router-dom';
+
+// Custom Components
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { Button } from '@/components/Button';
 import { CardProduct, CardProductList } from '@/components/CardProduct';
 import { DynamicIcon } from '@/components/DynamicIcon';
+
+// Types
 import type { Product } from '@/types/product';
+
+// Utils
 import { formatThousandNumber } from '@/utils/utils';
-import { useSearchParams } from 'react-router-dom';
 
 const popularProducts: Product[] = [
   {
