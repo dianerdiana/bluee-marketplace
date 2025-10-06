@@ -19,7 +19,7 @@ const SignUpPage = lazy(() => import('../pages/authentication/signup'));
 const HomePage = lazy(() => import('../pages/home'));
 
 // Product Pages
-const ProductPage = lazy(() => import('../pages/products/list'));
+const ProductListPage = lazy(() => import('../pages/products/list'));
 
 export const router = createBrowserRouter([
   {
@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
           { path: '/home', Component: HomePage },
 
           // Products Page
-          { path: '/products', Component: ProductPage },
+          { path: '/products', Component: ProductListPage },
         ],
       },
     ],

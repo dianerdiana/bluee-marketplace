@@ -1,11 +1,20 @@
-import { Badge } from '@/components/Badge';
-import { Button, ButtonLink } from '@/components/Button';
-import { DynamicIcon } from '@/components/DynamicIcon';
-import type { IconName } from '@/types/iconNames';
-import { formatCurrency } from '@/utils/utils';
+// Routing
 import { Link } from 'react-router-dom';
+
+// Custom Components
+import { DynamicIcon } from '@/components/DynamicIcon';
+import { CardProduct, CardProductList } from '@/components/CardProduct';
+import { ButtonLink } from '@/components/Button';
+
+// Thirdparty
 import { Autoplay, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Types
+import type { IconName } from '@/types/iconNames';
+
+// Utils
+import { formatThousandNumber } from '@/utils/utils';
 
 type CategoryType = {
   id: string;
@@ -44,7 +53,8 @@ const products = [
     category: 'Gadget',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '2',
@@ -54,7 +64,8 @@ const products = [
     category: 'Gadget',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '3',
@@ -64,7 +75,8 @@ const products = [
     category: 'Gadget',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '4',
@@ -74,7 +86,8 @@ const products = [
     category: 'Gadget',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '5',
@@ -84,7 +97,8 @@ const products = [
     category: 'Fashion',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '6',
@@ -94,7 +108,8 @@ const products = [
     category: 'Fashion',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '7',
@@ -104,7 +119,8 @@ const products = [
     category: 'Fashion',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
   {
     id: '8',
@@ -114,7 +130,8 @@ const products = [
     category: 'Fashion',
     totalSold: 120,
     price: 18500500,
-    liked: false,
+    isLiked: false,
+    isInCart: false,
   },
 ];
 
@@ -167,7 +184,7 @@ const HomePage = () => {
 
                 <div className='mt-6'>
                   <h2 className='mb-1 text-xl font-bold text-center'>{category.name}</h2>
-                  <p className='text-center text-secondary'>{category.totalItems} items</p>
+                  <p className='text-center text-secondary'>{formatThousandNumber(category.totalItems)} items</p>
                 </div>
               </Link>
             </SwiperSlide>
@@ -186,49 +203,22 @@ const HomePage = () => {
             </ButtonLink>
           </div>
 
-          <div className='grid grid-cols-12 gap-6 pb-24'>
+          <CardProductList className='pb-24'>
             {products.map((product) => (
-              <section
+              <CardProduct
                 key={product.id}
-                className='col-span-12 overflow-hidden border lg:col-span-3 md:col-span-6 border-back rounded-2xl'
-              >
-                <Link to={`/products/${product.slug}/details`}>
-                  <div className='overflow-hidden w-full h-[194px] bg-back text-center flex justify-center'>
-                    <div className='w-full max-w-[196px]'>
-                      <img
-                        src={product.imageUrl}
-                        alt={`Image Product ${product.name}`}
-                        className='object-contain object-center w-full h-auto'
-                      />
-                    </div>
-                  </div>
-
-                  <div className='px-5 pt-5'>
-                    <div className='flex items-center mb-3'>
-                      <Badge variant='light-primary' className='px-2 py-1 font-bold me-3'>
-                        {product.category}
-                      </Badge>
-                      <p className='font-semibold text-red-500'>{product.totalSold} Sold</p>
-                    </div>
-                    <div className='mb-6'>
-                      <h2 className='text-xl font-bold truncate'>{product.name}</h2>
-                      <p className='text-xl font-bold text-primary'>{formatCurrency(product.price)}</p>
-                    </div>
-                  </div>
-                </Link>
-
-                <div className='flex justify-between gap-4 px-5 pb-5 lg:gap-8'>
-                  <Button variant='light-pink' className='rounded-xl'>
-                    <DynamicIcon name='Heart' size={24} />
-                  </Button>
-                  <Button variant='light-primary' className='flex px-5 py-4 rounded-xl'>
-                    <DynamicIcon name='ShoppingCart' size={24} className='me-1.5' />
-                    <span>Add to Cart</span>
-                  </Button>
-                </div>
-              </section>
+                id={product.id}
+                slug={product.slug}
+                name={product.name}
+                imageUrl={product.imageUrl}
+                category={product.category}
+                totalSold={product.totalSold}
+                price={product.price}
+                isLiked={product.isLiked}
+                isInCart={product.isInCart}
+              />
             ))}
-          </div>
+          </CardProductList>
         </div>
       </section>
     </main>

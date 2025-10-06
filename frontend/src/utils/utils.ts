@@ -7,3 +7,7 @@ export const formatCurrency = (value: number) => {
     minimumFractionDigits: 0,
   }).format(value);
 };
+
+export const formatThousandNumber = (value: number) => {
+  return value.toLocaleString(appConfig.localCurrency);
+};
