@@ -43,8 +43,8 @@ export const CardProduct: React.FC<CardProductProps> = ({
       className='col-span-12 overflow-hidden border lg:col-span-3 md:col-span-6 border-back rounded-2xl'
     >
       <Link to={`/products/${slug}/details`}>
-        <div className='overflow-hidden w-full h-[194px] bg-back text-center flex justify-center'>
-          <div className='w-full max-w-[196px]'>
+        <div className='overflow-hidden w-full h-[194px] bg-back text-center flex justify-center items-center'>
+          <div className='w-full max-w-[196px] h-fit'>
             <img src={imageUrl} alt={`Image Product ${name}`} className='object-contain object-center w-full h-auto' />
           </div>
         </div>
@@ -64,10 +64,10 @@ export const CardProduct: React.FC<CardProductProps> = ({
       </Link>
 
       <div className='flex justify-between gap-4 px-5 pb-5 lg:gap-8'>
-        <Button variant='light-pink' className='rounded-xl'>
-          <DynamicIcon name='Heart' size={24} />
+        <Button variant={isLiked ? 'pink' : 'light-pink'} className='rounded-xl'>
+          <DynamicIcon name='Heart' size={24} variant={isLiked ? 'Bold' : 'Outline'} />
         </Button>
-        <Button variant='light-primary' className='flex px-5 py-4 rounded-xl'>
+        <Button variant={isInCart ? 'primary' : 'light-primary'} className='flex px-5 py-4 rounded-xl'>
           <DynamicIcon name='ShoppingCart' size={24} className='me-1.5' />
           <span>Add to Cart</span>
         </Button>

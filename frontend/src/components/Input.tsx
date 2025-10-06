@@ -32,7 +32,7 @@ export const BaseInput: FC<BaseInputProps> = ({ type = 'text', className, ...pro
   <input
     type={type}
     className={cn(
-      'appearance-none outline-none w-full text-sm placeholder:text-dark placeholder:font-bold tracking-[0.35px]',
+      'appearance-none text-base outline-none w-full placeholder:text-dark placeholder:font-bold tracking-[0.35px]',
       className,
     )}
     {...props}

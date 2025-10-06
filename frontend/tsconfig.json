@@ -5,12 +5,13 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@components/*": ["./src/components/*"],
-      "@configs/*": ["./src/configs/*"],
-      "@schemas/*": ["./src/schemas/*"],
-      "@layouts/*": ["./src/layouts/*"],
-      "@assets/*": ["./src/assets/*"],
-      "@utils/*": ["./src/utils/*"]
+      "@/components/*": ["./src/components/*"],
+      "@/configs/*": ["./src/configs/*"],
+      "@/schemas/*": ["./src/schemas/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/assets/*": ["./src/assets/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"]
     }
   }
 }
