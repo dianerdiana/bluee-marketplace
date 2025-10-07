@@ -10,6 +10,7 @@ const LazyApp = lazy(() => import('../App.tsx'));
 // Layouts
 import BlankLayout from '../layouts/BlankLayout';
 import HorizontalLayout from '../layouts/HorizontalLayout';
+import VerticalLayout from '../layouts/VerticalLayout';
 
 // Pages
 const SignInPage = lazy(() => import('../pages/authentication/signin'));
@@ -21,6 +22,9 @@ const HomePage = lazy(() => import('../pages/home'));
 // Product Pages
 const ProductListPage = lazy(() => import('../pages/products/list'));
 const ProductDetailPage = lazy(() => import('../pages/products/details'));
+
+// Dashboard
+const DashboardPage = lazy(() => import('../pages/dashboard'));
 
 export const router = createBrowserRouter([
   {
@@ -47,6 +51,10 @@ export const router = createBrowserRouter([
           { path: '/products', Component: ProductListPage },
           { path: '/products/:slug/details', Component: ProductDetailPage },
         ],
+      },
+      {
+        Component: VerticalLayout,
+        children: [{ path: '/dashboard', Component: DashboardPage }],
       },
     ],
   },
