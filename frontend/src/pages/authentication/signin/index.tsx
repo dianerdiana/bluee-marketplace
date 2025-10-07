@@ -1,5 +1,5 @@
 // Routing
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Custom Components
 import { IconWrapper, InputWrapper, BaseInput, InputMessage } from '@/components/Input';
@@ -21,6 +21,7 @@ import { signInSchema, type SignInSchema } from '@/schemas/auth.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignInPage = () => {
+  const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -35,6 +36,7 @@ const SignInPage = () => {
 
   const onSubmit = (data: SignInSchema) => {
     console.log('Form submitted:', data);
+    navigate('/home');
   };
 
   return (
