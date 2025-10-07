@@ -21,7 +21,7 @@ const variants = {
   'light-primary': 'bg-slate-primary text-primary hover:bg-blue-100 focus:ring-blue-500',
   'light-secondary': 'bg-slate-secondary text-secondary hover:bg-gray-100 focus:ring-gray-500',
   'light-pink': 'bg-pink-100 text-pink-500 hover:bg-pink-200 focus:ring-pink-300',
-  outline: 'border border-back text-gray-700 hover:bg-gray-100 focus:ring-gray-400',
+  'outline-secondary': 'border border-back text-secondary hover:bg-gray-100 focus:ring-gray-400',
 };
 
 export const Button: React.FC<ButtonProps> = ({ className, children, variant = 'primary', ...props }) => {

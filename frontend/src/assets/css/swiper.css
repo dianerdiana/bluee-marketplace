@@ -1,5 +1,3 @@
-@import 'swiper/css';
-
 .swiper-pagination {
   position: static !important; /* biar nggak absolute */
   margin-top: 12px; /* kasih jarak manual */

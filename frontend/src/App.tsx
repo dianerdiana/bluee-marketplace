@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 
 function App() {
   const [isMounted, setIsMounted] = useState(false);
@@ -16,6 +16,7 @@ function App() {
   return (
     <Suspense fallback={null}>
       <Outlet />
+      <ScrollRestoration />
     </Suspense>
   );
 }
