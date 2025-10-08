@@ -1,8 +1,8 @@
 // React Imports
-import { memo, useRef, useState } from 'react';
+import { memo, useState } from 'react';
 
 // Router Dom
-import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 
 // Thirdparty
 import { cn } from '@/configs/cn';
@@ -13,15 +13,8 @@ import { navigation, type SidenavItem } from '@/navigation';
 import { BrandImage } from '@/components/BrandImage';
 
 const VerticalLayout = memo(() => {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-
   const [open, setOpen] = useState(true);
   const toggleSideNav = () => setOpen((prev) => !prev);
-
-  const handleLogout = () => {
-    navigate('/signin');
-  };
 
   return (
     <>
@@ -47,10 +40,8 @@ const VerticalLayout = memo(() => {
                 <li key={idx + 1}>
                   {nav.isHeader ? (
                     <SidenavMenuHeader title={nav.title} />
-                  ) : nav.subMenu ? (
-                    <SidenavSubmenu pathname={pathname} {...nav} />
                   ) : (
-                    <SidenavMenuItem {...nav} />
+                    <SidenavMenuItem {...nav} isChild={false} />
                   )}
                 </li>
               ))}
@@ -89,118 +80,82 @@ const SidenavMenuHeader = ({ title }: { title: string }) => {
   return <h4 className='text-base font-medium text-secondary'>{title}</h4>;
 };
 
-const SidenavMenuItem = ({ title, href = '/home', icon = 'RecordCircle' }: SidenavItem) => {
-  return (
-    <NavLink to={href}>
-      {({ isActive }) => (
-        <div
-          className={cn(
-            'flex relative items-center px-4 py-4 rounded-2xl group hover:bg-slate-primary',
-            isActive && 'bg-slate-primary',
-          )}
-        >
-          <DynamicIcon
-            name={icon}
-            variant={isActive ? 'Bold' : 'Outline'}
-            className={`${isActive ? 'text-primary' : 'group-hover:text-primary'}`}
-          />
-          <span
-            className={cn('font-semibold ms-3 group-hover:text-primary', {
-              'text-primary': isActive,
-            })}
-          >
-            {title}
-          </span>
-
-          <span
-            className={cn(
-              'absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl rounded-e-md bg-primary',
-              {
-                'opacity-100': isActive,
-              },
-            )}
-          />
-        </div>
-      )}
-    </NavLink>
-  );
-};
-
-const SidenavSubmenu = ({ href, title, pathname, subMenuItems }: SidenavItem & { pathname: string }) => {
-  // ** State
+const SidenavMenuItem = ({
+  title,
+  href = '/home',
+  icon = 'RecordCircle',
+  subItems,
+  isChild = false,
+}: SidenavItem & { isChild: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const hasSubItems = subItems && subItems.length > 0;
 
-  const toggleSidenavSubMenu = () => {
-    setIsOpen(!isOpen);
+  const toggleSubMenu = (e: React.MouseEvent) => {
+    if (hasSubItems) {
+      e.preventDefault(); // Biar NavLink nggak langsung pindah halaman
+      setIsOpen((prev) => !prev);
+    }
   };
 
   return (
-    <div className='space-y-1 rounded-2xl'>
-      <button
-        onClick={toggleSidenavSubMenu}
-        className={cn(
-          'w-full flex items-center leading-10 rounded-2xl group hover:bg-primary focus:outline-none focus:ring-2 focus:ring-primary-200',
-          {
-            'bg-primary text-white': href.includes('pathname'),
-          },
+    <div className='flex flex-col'>
+      <NavLink to={href} onClick={toggleSubMenu}>
+        {({ isActive }) => (
+          <div
+            className={cn(
+              'flex relative items-center px-4 py-3 rounded-2xl group hover:bg-slate-primary transition-all duration-200',
+              isActive && 'bg-slate-primary',
+            )}
+          >
+            <DynamicIcon
+              name={icon}
+              size={isChild ? 16 : 24}
+              variant={isActive ? 'Bold' : 'Outline'}
+              className={cn('text-gray-400 group-hover:text-primary', isActive && 'text-primary')}
+            />
+
+            <span
+              className={cn('font-semibold ms-3 group-hover:text-primary flex-1', {
+                'text-primary': isActive,
+              })}
+            >
+              {title}
+            </span>
+
+            <span
+              className={cn(
+                'absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl rounded-e-md bg-primary',
+                { 'opacity-100': isActive },
+              )}
+            />
+
+            {hasSubItems && (
+              <span
+                className={cn('transition-transform duration-200 group-hover:text-primary', {
+                  'rotate-180': isOpen,
+                  'text-primary': isActive,
+                })}
+              >
+                <DynamicIcon name='ArrowCircleDown' size={16} />
+              </span>
+            )}
+          </div>
         )}
-      >
-        <span className='font-semibold ms-3 group-hover:text-white'>{title}</span>
+      </NavLink>
 
-        <DynamicIcon
-          name='ArrowUp'
-          className={cn('w-6 h-6 group-hover:text-white ms-auto transition-transform duration-200', {
-            'rotate-180': isOpen,
-          })}
-        />
-      </button>
-      <div
-        ref={contentRef}
-        style={{
-          maxHeight: isOpen ? `${contentRef.current?.scrollHeight}px` : '0px',
-        }}
-        className={`overflow-hidden transition-max-height duration-500 ease-in-out`}
-      >
-        <ul>
-          {subMenuItems?.map((nav, idx) => (
-            <li key={idx + 1}>
-              <NavLink to={nav.href}>
-                {({ isActive }) => (
-                  <div
-                    className={cn(
-                      'flex relative items-center px-4 py-4 rounded-2xl group hover:bg-slate-primary',
-                      isActive && 'bg-slate-primary',
-                    )}
-                  >
-                    <DynamicIcon
-                      name={nav.icon}
-                      variant={isActive ? 'Bold' : 'Outline'}
-                      className={`${isActive ? 'text-primary' : 'group-hover:text-primary'}`}
-                    />
-                    <span
-                      className={cn('font-semibold ms-3 group-hover:text-primary', {
-                        'text-primary': isActive,
-                      })}
-                    >
-                      {title}
-                    </span>
-
-                    <span
-                      className={cn(
-                        'absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl rounded-e-md bg-primary',
-                        {
-                          'opacity-100': isActive,
-                        },
-                      )}
-                    />
-                  </div>
-                )}
-              </NavLink>
-            </li>
+      {/* Submenu */}
+      {hasSubItems && (
+        <div
+          className={cn(
+            'overflow-hidden transition-[max-height] duration-300 ease-in-out ps-4',
+            isOpen ? 'max-h-96' : 'max-h-0',
+          )}
+        >
+          {subItems.map((sub, idx) => (
+            <SidenavMenuItem key={idx} {...sub} isChild={true} />
           ))}
-        </ul>
-      </div>
+        </div>
+      )}
     </div>
   );
 };

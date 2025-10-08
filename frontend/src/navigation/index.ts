@@ -6,7 +6,7 @@ export type SidenavItem = {
   title: string;
   icon?: IconName;
   href?: string;
-  children?: SidenavItem[];
+  subItems?: SidenavItem[];
 };
 
 export const navigation: SidenavItem[] = [
@@ -28,16 +28,16 @@ export const navigation: SidenavItem[] = [
     title: 'Category Sub',
     href: '/admin/category',
     icon: 'Map1',
-    children: [
+    subItems: [
       {
         title: 'Item 1',
         href: '/admin/item-1',
-        icon: 'RecordCircle',
+        icon: 'Cd',
       },
       {
         title: 'Item 2',
         href: '/admin/item-2',
-        icon: 'RecordCircle',
+        icon: 'Cd',
       },
     ],
   },
