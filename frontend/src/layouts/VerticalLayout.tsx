@@ -12,6 +12,7 @@ import { DynamicIcon } from '@/components/DynamicIcon';
 import { navigation, type SidenavItem } from '@/navigation';
 import { BrandImage } from '@/components/BrandImage';
 import { Button } from '@/components/Button';
+import { Container } from '@/components/Container';
 
 const VerticalLayout = memo(() => {
   const [sidenavOpen, setSidenavOpen] = useState(true);
@@ -53,41 +54,46 @@ const VerticalLayout = memo(() => {
 
       {/* Top Nav */}
       <div className='lg:ms-64 ms-0'>
-        <header className='px-2 py-4 row gap-4'>
-          <div className={cn('flex flex-wrap justify-between items-center p-4 w-full flex-1 bg-white rounded-2xl')}>
-            <div className='flex-col-2 lg:hidden'>
-              <button onClick={toggleSideNav} className='p-2 border rounded-md text-secondary cursor-pointer'>
-                <DynamicIcon name='HamburgerMenu' />
-              </button>
-            </div>
-            <div className='hidden lg:block'>
-              <h1 className='font-dark font-bold lg:text-2xl text-lg'>Dashboard Overview</h1>
-              <p className='text-secondary lg:text-base font-semibold text-sm'>View Your Dashboard</p>
-            </div>
-            <div className='gap-x-2 flex'>
-              <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
-                <DynamicIcon name='SearchNormal1' className='text-dark' size={24} />
-              </Button>
-              <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
-                <DynamicIcon name='Notification' className='text-dark' size={24} />
-              </Button>
-              <div className='flex items-center'>
-                <Button
-                  variant='secondary'
-                  className='lg:w-12 lg:h-12 w-10 h-10 p-0 overflow-hidden bg-gray-200 rounded-full'
-                >
-                  <img src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/profile-1.png' alt='profile' />
+        <Container className='pt-2 mb-5'>
+          <header className='row gap-4'>
+            <div className={cn('flex flex-wrap justify-between items-center p-4 w-full flex-1 bg-white rounded-2xl')}>
+              <div className='flex-col-2 lg:hidden'>
+                <button onClick={toggleSideNav} className='p-2 border rounded-md text-secondary cursor-pointer'>
+                  <DynamicIcon name='HamburgerMenu' />
+                </button>
+              </div>
+              <div className='hidden lg:block'>
+                <h1 className='font-dark font-bold lg:text-2xl text-lg'>Dashboard Overview</h1>
+                <p className='text-secondary lg:text-base font-semibold text-sm'>View Your Dashboard</p>
+              </div>
+              <div className='gap-x-2 flex'>
+                <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
+                  <DynamicIcon name='SearchNormal1' className='text-dark' size={24} />
                 </Button>
-                <div className='ms-2.5 hidden lg:block'>
-                  <p className='font-semibold'>Bimore W</p>
-                  <p className='flex shrink-0 text-secondary items-center'>
-                    <DynamicIcon name='User' className='me-1.5' size={16} /> <span>Buyer</span>
-                  </p>
+                <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
+                  <DynamicIcon name='Notification' className='text-dark' size={24} />
+                </Button>
+                <div className='flex items-center'>
+                  <Button
+                    variant='secondary'
+                    className='lg:w-12 lg:h-12 w-10 h-10 p-0 overflow-hidden bg-gray-200 rounded-full'
+                  >
+                    <img
+                      src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/profile-1.png'
+                      alt='profile'
+                    />
+                  </Button>
+                  <div className='ms-2.5 hidden lg:block'>
+                    <p className='font-semibold'>Bimore W</p>
+                    <p className='flex shrink-0 text-secondary items-center'>
+                      <DynamicIcon name='User' className='me-1.5' size={16} /> <span>Buyer</span>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </header>
+          </header>
+        </Container>
 
         <Outlet />
       </div>

@@ -12,6 +12,8 @@
   --leading-160: 160%;
 }
 
+@import './assets/css/custom.css';
+
 @utility bg-image-overlay {
   background-image: linear-gradient(
     to bottom,

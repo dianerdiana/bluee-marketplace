@@ -1,17 +1,28 @@
+// React Imports
+import { useState } from 'react';
+
+// Route Dom
+import { Link } from 'react-router-dom';
+
+// Custom Components
 import { Badge } from '@/components/Badge';
 import { Breadcrumb } from '@/components/Breadcrumb';
 import { Button, ButtonLink } from '@/components/Button';
 import { CardProduct, CardProductList } from '@/components/CardProduct';
 import { DynamicIcon } from '@/components/DynamicIcon';
 import { Rating, Star } from '@/components/Rating';
-import type { Product } from '@/types/product';
-import { formatCurrency } from '@/utils/utils';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+
+// Thirdparty
 import parse from 'html-react-parser';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { FreeMode, Pagination, Thumbs } from 'swiper/modules';
 import type { Swiper as SwiperType } from 'swiper/types';
+
+// Types
+import type { Product } from '@/types/product';
+
+// Utils
+import { formatCurrency } from '@/utils/utils';
 
 const products: Product[] = [
   {

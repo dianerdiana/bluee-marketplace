@@ -8,27 +8,13 @@ type ColProps = React.HTMLAttributes<HTMLDivElement> & {
   lg?: ColNumber;
   xl?: ColNumber;
 };
-
-const getWidthClass = (size?: ColNumber, prefix?: string) => {
-  if (!size) return '';
-  return `${prefix ? `${prefix}:` : ''}w-${size}/12`;
-};
-
-export const Col: React.FC<ColProps> = ({
-  children,
-  className,
-  sm = 12, // default 1 kolom penuh di layar kecil
-  md,
-  lg,
-  xl,
-  ...props
-}) => {
+export const Col: React.FC<ColProps> = ({ children, className, sm, md, lg, xl, ...props }) => {
   const classes = cn(
-    'flex-1 px-2',
-    getWidthClass(sm, 'sm'),
-    getWidthClass(md, 'md'),
-    getWidthClass(lg, 'lg'),
-    getWidthClass(xl, 'xl'),
+    'px-2 grow',
+    sm && `app-col-sm-${sm}`,
+    md && `app-col-md-${md}`,
+    lg && `app-col-lg-${lg}`,
+    xl && `app-col-xl-${xl}`,
     className,
   );
 
