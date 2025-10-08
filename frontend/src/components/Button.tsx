@@ -19,7 +19,7 @@ const variants = {
   dark: 'bg-dark text-white hover:bg-gray-700 focus:ring-gray-900',
   pink: 'bg-pink-500 text-white hover:bg-pink-700 focus:ring-pink-900',
   'light-primary': 'bg-slate-primary text-primary hover:bg-blue-100 focus:ring-blue-500',
-  'light-secondary': 'bg-slate-secondary text-secondary hover:bg-gray-100 focus:ring-gray-500',
+  'light-secondary': 'bg-gray-200 text-secondary hover:bg-gray-300 focus:ring-gray-300',
   'light-pink': 'bg-pink-100 text-pink-500 hover:bg-pink-200 focus:ring-pink-300',
   'outline-secondary': 'border border-back text-secondary hover:bg-gray-100 focus:ring-gray-400',
 };

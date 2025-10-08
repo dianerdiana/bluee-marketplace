@@ -11,24 +11,25 @@ import { DynamicIcon } from '@/components/DynamicIcon';
 // Type
 import { navigation, type SidenavItem } from '@/navigation';
 import { BrandImage } from '@/components/BrandImage';
+import { Button } from '@/components/Button';
 
 const VerticalLayout = memo(() => {
-  const [open, setOpen] = useState(true);
-  const toggleSideNav = () => setOpen((prev) => !prev);
+  const [sidenavOpen, setSidenavOpen] = useState(true);
+  const toggleSideNav = () => setSidenavOpen((prev) => !prev);
 
   return (
     <>
       {/* Sidebar */}
       <aside
-        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 ${
-          open ? '-translate-x-full' : 'translate-x-0'
+        className={`fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full lg:translate-x-0 ${
+          sidenavOpen ? '-translate-x-full' : 'translate-x-0'
         }`}
         aria-label='Sidebar'
       >
         <div className='flex flex-col h-full px-4 py-8 overflow-y-auto bg-white gap-7'>
-          <div className='absolute top-0 right-0 p-1'>
-            <button onClick={toggleSideNav} className='sm:hidden'>
-              <DynamicIcon name='CloseSquare' className='w-4 h-4' />
+          <div className='absolute top-0 right-0 p-2'>
+            <button onClick={toggleSideNav} className='lg:hidden cursor-pointer'>
+              <DynamicIcon name='CloseSquare' size={24} />
             </button>
           </div>
           <Link to={'/home'} className='border-none outline-none'>
@@ -51,18 +52,38 @@ const VerticalLayout = memo(() => {
       </aside>
 
       {/* Top Nav */}
-      <div className='h-screen sm:ml-64'>
-        <header className='p-4 border-b-[1px]'>
-          <div className='flex justify-between'>
-            <div>
-              <button onClick={toggleSideNav} className='p-2 border rounded-md text-gold border-gold sm:hidden'>
-                <DynamicIcon name='ArrowUp' />
+      <div className='lg:ms-64 ms-0'>
+        <header className='px-2 py-4 row gap-4'>
+          <div className={cn('flex flex-wrap justify-between items-center p-4 w-full flex-1 bg-white rounded-2xl')}>
+            <div className='flex-col-2 lg:hidden'>
+              <button onClick={toggleSideNav} className='p-2 border rounded-md text-secondary cursor-pointer'>
+                <DynamicIcon name='HamburgerMenu' />
               </button>
             </div>
-            <div className='flex items-center gap-3'>
-              <div>
-                <p className='text-xs text-gold text-end'>username</p>
-                <p className='text-sm font-semibold text-white text-end'>Full Name</p>
+            <div className='hidden lg:block'>
+              <h1 className='font-dark font-bold lg:text-2xl text-lg'>Dashboard Overview</h1>
+              <p className='text-secondary lg:text-base font-semibold text-sm'>View Your Dashboard</p>
+            </div>
+            <div className='gap-x-2 flex'>
+              <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
+                <DynamicIcon name='SearchNormal1' className='text-dark' size={24} />
+              </Button>
+              <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
+                <DynamicIcon name='Notification' className='text-dark' size={24} />
+              </Button>
+              <div className='flex items-center'>
+                <Button
+                  variant='secondary'
+                  className='lg:w-12 lg:h-12 w-10 h-10 p-0 overflow-hidden bg-gray-200 rounded-full'
+                >
+                  <img src='https://ik.imagekit.io/dianerdiana/bluee-marketplace/images/profile-1.png' alt='profile' />
+                </Button>
+                <div className='ms-2.5 hidden lg:block'>
+                  <p className='font-semibold'>Bimore W</p>
+                  <p className='flex shrink-0 text-secondary items-center'>
+                    <DynamicIcon name='User' className='me-1.5' size={16} /> <span>Buyer</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -111,7 +132,7 @@ const SidenavMenuItem = ({
               name={icon}
               size={isChild ? 16 : 24}
               variant={isActive ? 'Bold' : 'Outline'}
-              className={cn('text-gray-400 group-hover:text-primary', isActive && 'text-primary')}
+              className={cn('text-dark group-hover:text-primary', isActive && 'text-primary')}
             />
 
             <span
@@ -136,7 +157,7 @@ const SidenavMenuItem = ({
                   'text-primary': isActive,
                 })}
               >
-                <DynamicIcon name='ArrowCircleDown' size={16} />
+                <DynamicIcon name='ArrowCircleDown' size={20} />
               </span>
             )}
           </div>
