@@ -1,0 +1,127 @@
+/* InValid Select */
+.react-select.is-invalid .select__control {
+  border-color: var(--color-danger, #f87171) !important; /* merah default */
+}
+
+/* Select Control (Input) */
+.select__control,
+.react-select__control {
+  border-color: var(--color-input-border, #e5e7eb);
+  border-radius: 3rem;
+  padding: 4px 4px;
+  transition: all 0.3s ease;
+}
+
+.select__control .select__input,
+.react-select__control .react-select__input {
+  color: var(--color-body, #111827) !important;
+}
+
+.select__control--is-disabled {
+  border-color: var(--color-border, #d1d5db);
+}
+
+.select__control--is-disabled .select__indicator-separator {
+  background-color: var(--color-border, #d1d5db);
+}
+
+.select__control--is-focused,
+.react-select__control--is-focused {
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.4);
+  border-color: var(--color-primary, #2563eb);
+}
+
+.select__indicator svg {
+  cursor: pointer;
+  color: var(--color-body, #111827);
+}
+
+.select__indicator-separator {
+  display: none;
+}
+
+.select__single-value {
+  color: var(--color-body, #111827);
+  font-weight: 500;
+}
+
+.select__placeholder {
+  color: var(--color-body, #111827);
+  font-weight: 600;
+}
+
+/* Select Menu */
+.select__menu,
+.react-select__menu {
+  border-radius: 1rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: white;
+}
+
+.select__option,
+.react-select__option {
+  cursor: pointer;
+  padding: 12px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.select__option--is-focused {
+  background-color: rgba(37, 99, 235, 0.12);
+  color: var(--color-primary, #2563eb);
+}
+
+.select__option--is-selected {
+  background-color: var(--color-primary, #2563eb);
+  color: white;
+}
+
+/* Group headings */
+.select__group-heading {
+  margin-bottom: 0.5rem;
+  color: var(--color-heading, #1f2937);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+/* Multi Select */
+.select__multi-value,
+.react-select__multi-value {
+  color: white;
+  border-radius: 6rem;
+  margin: 0 0.7rem 0 0;
+  background-color: var(--color-primary, #2563eb);
+}
+
+.select__multi-value__label {
+  color: white;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 0.26rem 0.6rem;
+}
+
+.select__multi-value__remove {
+  padding-left: 0;
+  padding-right: 0.5rem;
+}
+
+.select__multi-value__remove:hover {
+  background-color: inherit;
+  color: inherit;
+}
+
+.select__multi-value__remove svg {
+  height: 0.85rem;
+  width: 0.85rem;
+  cursor: pointer;
+}
+
+/* Select Borderless */
+.select-borderless .select__control {
+  border: 0 !important;
+}
+
+.select-borderless .select__indicators {
+  display: none !important;
+}

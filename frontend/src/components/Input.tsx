@@ -1,11 +1,16 @@
 import type { FC } from 'react';
 import { cn } from '@/configs/cn';
+import { DynamicIcon } from './DynamicIcon';
 
 type InputWrapperProps = React.HTMLAttributes<HTMLDivElement> & { isInvalid?: boolean };
 type IconWrapperProps = React.HTMLAttributes<HTMLDivElement>;
 type InputProps = { wrapperProps?: InputWrapperProps } & React.ComponentProps<'input'>;
 type BaseInputProps = React.ComponentProps<'input'>;
 type InputMessageProps = React.HtmlHTMLAttributes<HTMLSpanElement>;
+type SelectProps = React.SelectHTMLAttributes<HTMLSelectElement> & {
+  isInvalid?: boolean;
+  wrapperClassName?: string;
+};
 
 export const InputWrapper: FC<InputWrapperProps> = ({ children, className, isInvalid = false, ...props }) => (
   <div
@@ -49,4 +54,35 @@ export const InputMessage: FC<InputMessageProps> = ({ className, children, ...pr
   <span className={cn('text-red-400 text-sm', className)} {...props}>
     {children}
   </span>
+);
+
+export const SelectInput: FC<SelectProps> = ({
+  isInvalid = false,
+  wrapperClassName,
+  className,
+  children,
+  ...props
+}) => (
+  <InputWrapper
+    isInvalid={isInvalid}
+    className={cn('p-0 gap-0', wrapperClassName)} // biar padding dari wrapper nggak double
+  >
+    <select
+      className={cn(
+        'appearance-none bg-transparent text-base outline-none py-3 px-2 tracking-[0.35px]',
+        'placeholder:text-dark placeholder:font-bold',
+        'cursor-pointer',
+        isInvalid ? 'text-red-500' : 'text-black',
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </select>
+
+    {/* Chevron bawaan custom */}
+    <div className='pe-2'>
+      <DynamicIcon name='ArrowDown2' size={20} />
+    </div>
+  </InputWrapper>
 );

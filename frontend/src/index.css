@@ -9,10 +9,15 @@
   --color-back: #f3f5f9;
   --color-dark: #292d32;
   --color-secondary: #6a7686;
+  --color-warning: #FF7020;
+  --color-slate-warning: #FF702130;
+  --color-success: #00A48A;
+  --color-slate-success: #00A48A30;
   --leading-160: 160%;
 }
 
 @import './assets/css/custom.css';
+@import './assets/css/react-paginate.css';
 
 @utility bg-image-overlay {
   background-image: linear-gradient(
