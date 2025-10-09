@@ -1,42 +1,37 @@
-import type { IconName } from '@/types/iconNames';
+import type { NavigationItem } from '@/types/navigationItem';
 
-// ** Icons
-export type SidenavItem = {
-  isHeader?: boolean;
-  title: string;
-  icon?: IconName;
-  href?: string;
-  subItems?: SidenavItem[];
-};
-
-export const navigation: SidenavItem[] = [
+export const navigation: NavigationItem[] = [
   {
+    header: 'Main Menu',
     title: 'Main Menu',
-    isHeader: true,
   },
   {
     title: 'Overview',
-    href: '/dashboard',
+    linkTitle: 'Dashboard Overview',
+    linkDescription: 'View Your Dashboard',
+    navLink: '/dashboard',
     icon: 'Home',
   },
   {
-    title: 'My Transaction',
-    href: '/admin/guests',
+    title: 'My Transactions',
+    linkTitle: 'Manage Transactions',
+    linkDescription: 'View and Manage Your Transactions',
+    navLink: '/transactions',
     icon: 'Stickynote',
   },
   {
     title: 'Category Sub',
-    href: '/admin/category',
+    navLink: '/admin/category',
     icon: 'Map1',
     subItems: [
       {
         title: 'Item 1',
-        href: '/admin/item-1',
+        navLink: '/admin/item-1',
         icon: 'Cd',
       },
       {
         title: 'Item 2',
-        href: '/admin/item-2',
+        navLink: '/admin/item-2',
         icon: 'Cd',
       },
     ],

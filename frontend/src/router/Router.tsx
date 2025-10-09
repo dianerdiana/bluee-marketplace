@@ -12,6 +12,9 @@ import BlankLayout from '../layouts/BlankLayout';
 import HorizontalLayout from '../layouts/HorizontalLayout';
 import VerticalLayout from '../layouts/VerticalLayout';
 
+// Types
+import type { RouteHandle } from '@/types/routeHandle.ts';
+
 // Pages
 const SignInPage = lazy(() => import('../pages/authentication/signin'));
 const SignUpPage = lazy(() => import('../pages/authentication/signup'));
@@ -25,6 +28,7 @@ const ProductDetailPage = lazy(() => import('../pages/products/details'));
 
 // Dashboard
 const DashboardPage = lazy(() => import('../pages/dashboard'));
+const TransactionsListPage = lazy(() => import('../pages/transactions/list'));
 
 export const router = createBrowserRouter([
   {
@@ -54,7 +58,24 @@ export const router = createBrowserRouter([
       },
       {
         Component: VerticalLayout,
-        children: [{ path: '/dashboard', Component: DashboardPage }],
+        children: [
+          {
+            path: '/dashboard',
+            Component: DashboardPage,
+            handle: {
+              title: 'Dashboard Overview',
+              description: 'Your Dashboard Overview',
+            } satisfies RouteHandle,
+          },
+          {
+            path: '/transactions',
+            Component: TransactionsListPage,
+            handle: {
+              title: 'Manage Transactions',
+              description: 'View & Update Your Transactions',
+            } satisfies RouteHandle,
+          },
+        ],
       },
     ],
   },

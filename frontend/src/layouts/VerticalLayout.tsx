@@ -2,20 +2,36 @@
 import { memo, useState } from 'react';
 
 // Router Dom
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet, useMatches } from 'react-router-dom';
+
+// Custom Components
+import { BrandImage } from '@/components/BrandImage';
+import { Button } from '@/components/Button';
+import { Container } from '@/components/Container';
 
 // Thirdparty
 import { cn } from '@/configs/cn';
 import { DynamicIcon } from '@/components/DynamicIcon';
 
 // Type
-import { navigation, type SidenavItem } from '@/navigation';
-import { BrandImage } from '@/components/BrandImage';
-import { Button } from '@/components/Button';
-import { Container } from '@/components/Container';
+import type { NavigationItem } from '@/types/navigationItem';
+import type { RouteHandle } from '@/types/routeHandle';
+
+// Utils
+import { navigation } from '@/navigation';
 
 const VerticalLayout = memo(() => {
   const [sidenavOpen, setSidenavOpen] = useState(true);
+  const matches = useMatches();
+
+  const currentMatch = matches.find((m) => {
+    const h = m.handle;
+    return typeof h === 'object' && h !== null && 'title' in (h as Record<string, unknown>);
+  }) as ((typeof matches)[number] & { handle: RouteHandle }) | undefined;
+
+  const linkTitle = currentMatch?.handle?.title ?? 'Default Title';
+  const linkDescription = currentMatch?.handle?.description ?? 'Default Description';
+
   const toggleSideNav = () => setSidenavOpen((prev) => !prev);
 
   return (
@@ -36,24 +52,17 @@ const VerticalLayout = memo(() => {
           <Link to={'/home'} className='border-none outline-none'>
             <BrandImage />
           </Link>
-          <nav className='flex flex-col justify-between h-full'>
+          <nav className='h-full'>
             <ul className='space-y-2'>
-              {navigation.map((nav, idx) => (
-                <li key={idx + 1}>
-                  {nav.isHeader ? (
-                    <SidenavMenuHeader title={nav.title} />
-                  ) : (
-                    <SidenavMenuItem {...nav} isChild={false} />
-                  )}
-                </li>
-              ))}
+              <NavMenuItems items={navigation} />
             </ul>
           </nav>
         </div>
       </aside>
 
-      {/* Top Nav */}
+      {/* Content */}
       <div className='lg:ms-64 ms-0'>
+        {/* Top Nav */}
         <Container className='pt-2 mb-5'>
           <header className='row gap-4'>
             <div className={cn('flex flex-wrap justify-between items-center p-4 w-full flex-1 bg-white rounded-2xl')}>
@@ -63,8 +72,8 @@ const VerticalLayout = memo(() => {
                 </button>
               </div>
               <div className='hidden lg:block'>
-                <h1 className='font-dark font-bold lg:text-2xl text-lg'>Dashboard Overview</h1>
-                <p className='text-secondary lg:text-base font-semibold text-sm'>View Your Dashboard</p>
+                <h1 className='font-dark font-bold lg:text-2xl text-lg'>{linkTitle}</h1>
+                <p className='text-secondary lg:text-base font-semibold text-sm'>{linkDescription}</p>
               </div>
               <div className='gap-x-2 flex'>
                 <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
@@ -95,7 +104,9 @@ const VerticalLayout = memo(() => {
           </header>
         </Container>
 
-        <Outlet />
+        <main className='pb-10'>
+          <Outlet />
+        </main>
       </div>
     </>
   );
@@ -103,17 +114,59 @@ const VerticalLayout = memo(() => {
 
 export default VerticalLayout;
 
-const SidenavMenuHeader = ({ title }: { title: string }) => {
-  return <h4 className='text-base font-medium text-secondary'>{title}</h4>;
+const NavMenuSectionHeader = ({ header }: { header: string }) => {
+  return (
+    <li className='text-base font-medium text-secondary'>
+      <span>{header}</span>
+    </li>
+  );
 };
 
-const SidenavMenuItem = ({
+const NavMenuLink: React.FC<NavigationItem & { isChild: boolean }> = ({
   title,
-  href = '/home',
-  icon = 'RecordCircle',
-  subItems,
-  isChild = false,
-}: SidenavItem & { isChild: boolean }) => {
+  navLink = '',
+  icon = 'Cd',
+  isChild,
+}) => {
+  return (
+    <li>
+      <NavLink to={navLink}>
+        {({ isActive }) => (
+          <div
+            className={cn(
+              'flex relative items-center px-4 py-3 rounded-2xl group hover:bg-slate-primary transition-all duration-200',
+              isActive && 'bg-slate-primary',
+            )}
+          >
+            <DynamicIcon
+              name={icon}
+              size={isChild ? 16 : 24}
+              variant={isActive ? 'Bold' : 'Outline'}
+              className={cn('text-dark group-hover:text-primary', isActive && 'text-primary')}
+            />
+
+            <span
+              className={cn('font-semibold ms-3 group-hover:text-primary flex-1', {
+                'text-primary': isActive,
+              })}
+            >
+              {title}
+            </span>
+
+            <span
+              className={cn(
+                'absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl rounded-e-md bg-primary',
+                { 'opacity-100': isActive },
+              )}
+            />
+          </div>
+        )}
+      </NavLink>
+    </li>
+  );
+};
+
+const NavMenuGroup: React.FC<NavigationItem> = ({ title, navLink = '/home', icon = 'RecordCircle', subItems }) => {
   const [isOpen, setIsOpen] = useState(false);
   const hasSubItems = subItems && subItems.length > 0;
 
@@ -125,8 +178,8 @@ const SidenavMenuItem = ({
   };
 
   return (
-    <div className='flex flex-col'>
-      <NavLink to={href} onClick={toggleSubMenu}>
+    <li className='flex flex-col'>
+      <NavLink to={navLink} onClick={toggleSubMenu}>
         {({ isActive }) => (
           <div
             className={cn(
@@ -136,7 +189,7 @@ const SidenavMenuItem = ({
           >
             <DynamicIcon
               name={icon}
-              size={isChild ? 16 : 24}
+              size={24}
               variant={isActive ? 'Bold' : 'Outline'}
               className={cn('text-dark group-hover:text-primary', isActive && 'text-primary')}
             />
@@ -172,17 +225,33 @@ const SidenavMenuItem = ({
 
       {/* Submenu */}
       {hasSubItems && (
-        <div
+        <ul
           className={cn(
             'overflow-hidden transition-[max-height] duration-300 ease-in-out ps-4',
             isOpen ? 'max-h-96' : 'max-h-0',
           )}
         >
           {subItems.map((sub, idx) => (
-            <SidenavMenuItem key={idx} {...sub} isChild={true} />
+            <NavMenuLink key={idx} {...sub} isChild={true} />
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </li>
   );
+};
+
+const NavMenuItems: React.FC<{ items: NavigationItem[] }> = ({ items }) => {
+  const RenderNavItems = items.map((item, idx) => {
+    if (item.header) {
+      return <NavMenuSectionHeader key={idx} header={item.header} />;
+    }
+
+    if (item.subItems && item.subItems.length) {
+      return <NavMenuGroup key={idx} {...item} />;
+    }
+
+    return <NavMenuLink key={idx} {...item} isChild={false} />;
+  });
+
+  return RenderNavItems;
 };
