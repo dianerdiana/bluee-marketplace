@@ -15,7 +15,14 @@ type ListHeaderProps = {
   icon: IconName;
 };
 type ListMenuProps = React.HTMLAttributes<HTMLUListElement>;
-type ListItemProps = { icon: IconName; label: string; value: string };
+type ListItemProps = {
+  icon: IconName;
+  label: string;
+  value: string;
+  labelClassName?: string;
+  valueClassName?: string;
+  line?: boolean;
+};
 
 export const ListHeader: React.FC<ListHeaderProps> = ({
   imageUrl,
@@ -54,9 +61,9 @@ export const ListMenu: React.FC<ListMenuProps> = ({ children, className, ...prop
   );
 };
 
-export const ListItem: React.FC<ListItemProps> = ({ icon, label, value }) => {
+export const ListItem: React.FC<ListItemProps> = ({ icon, label, value, line = true }) => {
   return (
-    <li className='not-last:border-b not-last:border-b-back py-4'>
+    <li className={cn('py-4', { 'not-last:border-b not-last:border-b-back': line })}>
       <Row className='items-center'>
         <Col className='grow-0'>
           <Badge variant='light-secondary' className='rounded-full px-3 py-3'>
@@ -72,18 +79,25 @@ export const ListItem: React.FC<ListItemProps> = ({ icon, label, value }) => {
   );
 };
 
-export const ListItemHorizontal: React.FC<ListItemProps> = ({ icon, label, value }) => {
+export const ListItemHorizontal: React.FC<ListItemProps> = ({
+  icon,
+  label,
+  value,
+  labelClassName,
+  valueClassName,
+  line,
+}) => {
   return (
-    <li>
+    <li className={cn('py-4', { 'not-last:border-b not-last:border-b-back': line })}>
       <Row className='items-center justify-between'>
         <Col>
           <div className='flex items-center text-secondary'>
             <DynamicIcon name={icon} className='me-1.5' />
-            <span className='font-medium'>{label}</span>
+            <span className={cn('font-medium', labelClassName)}>{label}</span>
           </div>
         </Col>
         <Col>
-          <p className='font-bold text-lg text-end'>{value}</p>
+          <p className={cn('font-bold text-lg text-end', valueClassName)}>{value}</p>
         </Col>
       </Row>
     </li>

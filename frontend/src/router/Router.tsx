@@ -26,6 +26,9 @@ const HomePage = lazy(() => import('../pages/home'));
 const ProductListPage = lazy(() => import('../pages/products/list'));
 const ProductDetailPage = lazy(() => import('../pages/products/details'));
 
+// Carts
+const CartListPage = lazy(() => import('../pages/carts/list'));
+
 // Dashboard
 const DashboardPage = lazy(() => import('../pages/dashboard'));
 const TransactionsListPage = lazy(() => import('../pages/transactions/list'));
@@ -55,6 +58,9 @@ export const router = createBrowserRouter([
           // Products Page
           { path: '/products', Component: ProductListPage },
           { path: '/products/:slug/details', Component: ProductDetailPage },
+
+          // Carts Page
+          { path: '/carts', Component: CartListPage },
         ],
       },
       {

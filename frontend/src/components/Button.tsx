@@ -21,6 +21,7 @@ const variants = {
   'light-primary': 'bg-slate-primary text-primary hover:bg-blue-100 focus:ring-blue-500',
   'light-secondary': 'bg-gray-200 text-secondary hover:bg-gray-300 focus:ring-gray-300',
   'light-pink': 'bg-pink-100 text-pink-500 hover:bg-pink-200 focus:ring-pink-300',
+  'light-danger': 'bg-red-100 text-red-500 hover:bg-red-200 focus:ring-red-300',
   'outline-secondary': 'border border-back text-secondary hover:bg-gray-100 focus:ring-gray-400',
 };
 
