@@ -24,7 +24,7 @@ type InputRatingProps = {
   onChange?: (value: number) => void;
 };
 
-type InputIconTextareaProps = React.ComponentProps<'textarea'> & {
+type TextareaIconProps = React.ComponentProps<'textarea'> & {
   isInvalid?: boolean;
   icon?: IconName;
   wrapperProps?: InputWrapperProps;
@@ -74,13 +74,13 @@ export const InputIcon: FC<InputIconProps> = ({ isInvalid, icon = 'Sms', type, .
       <IconWrapper>
         <DynamicIcon name={icon} size={24} className='text-secondary' />
       </IconWrapper>
-      <span className='w-px h-full bg-secondary' />
+      <span className='w-px self-stretch bg-back' />
       <BaseInput type={type} {...props} />
     </InputWrapper>
   );
 };
 
-export const InputIconTextarea: FC<InputIconTextareaProps> = ({ isInvalid, icon = 'Sms', ...props }) => {
+export const TextareaIcon: FC<TextareaIconProps> = ({ isInvalid, icon = 'Sms', ...props }) => {
   return (
     <InputWrapper isInvalid={isInvalid}>
       <IconWrapper>

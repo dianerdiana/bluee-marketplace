@@ -9,7 +9,7 @@ import { Card, CardBody, CardHeader, CardTitle } from '@/components/Card';
 import { Col } from '@/components/Col';
 import { Container } from '@/components/Container';
 import { DynamicIcon } from '@/components/DynamicIcon';
-import { InputIconTextarea, InputMessage, InputRating } from '@/components/Input';
+import { TextareaIcon, InputMessage, InputRating } from '@/components/Input';
 import { Label } from '@/components/Label';
 import { ListMenu, ListHeader, ListItem, ListItemHorizontal } from '@/components/List';
 import { Modal, ModalBody, ModalHeader, ModalTitle } from '@/components/Modal';
@@ -359,7 +359,7 @@ const TransactionDetailPage = () => {
                 control={control}
                 render={({ field }) => {
                   return (
-                    <InputIconTextarea
+                    <TextareaIcon
                       isInvalid={errors.testimony && true}
                       icon='MessageText'
                       placeholder='Enter your feedback here'
