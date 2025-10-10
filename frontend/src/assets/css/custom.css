@@ -93,3 +93,12 @@
   .app-col-lg-11 { width: calc(var(--col) * 11); }
   .app-col-lg-12 { width: calc(var(--col) * 12); }
 }
+
+.match-height > [class*="app-col"] {
+  display: flex;
+  flex-flow: column;
+}
+
+.match-height > [class*="app-col"] > .card {
+  flex: 1 1 auto;
+}
