@@ -1,15 +1,21 @@
+// Thirdparty
+import ReactPaginate from 'react-paginate';
+
+// Custom Components
 import { Badge } from '@/components/Badge';
-import { Button } from '@/components/Button';
+import { Button, ButtonLink } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Col } from '@/components/Col';
 import { Container } from '@/components/Container';
 import { DynamicIcon } from '@/components/DynamicIcon';
 import { BaseInput, IconWrapper, InputWrapper, SelectInput } from '@/components/Input';
 import { Row } from '@/components/Row';
+// Types
 import { type DeliveryStatusType, DeliveryStatusEnum } from '@/types/deliveryStatus';
+
+// Utils
 import type { badgevariants } from '@/utils/constants/badgeVariants';
 import { formatCurrency, formatThousandNumber } from '@/utils/utils';
-import ReactPaginate from 'react-paginate';
 
 const transactions = [
   {
@@ -22,7 +28,7 @@ const transactions = [
     grandTotal: 3200650,
     transactionDelivery: {
       transactionId: '1',
-      status: DeliveryStatusEnum.Delivering,
+      status: DeliveryStatusEnum.DELIVERING,
       deliveryDate: '24 Mei 2025',
     },
   },
@@ -36,7 +42,7 @@ const transactions = [
     grandTotal: 3200650,
     transactionDelivery: {
       transactionId: '2',
-      status: DeliveryStatusEnum.Completed,
+      status: DeliveryStatusEnum.COMPLETED,
       deliveryDate: '24 Mei 2025',
     },
   },
@@ -50,7 +56,7 @@ const transactions = [
     grandTotal: 3200650,
     transactionDelivery: {
       transactionId: '3',
-      status: DeliveryStatusEnum.Pending,
+      status: DeliveryStatusEnum.PENDING,
       deliveryDate: '24 Mei 2025',
     },
   },
@@ -64,23 +70,38 @@ const transactions = [
     grandTotal: 3200650,
     transactionDelivery: {
       transactionId: '4',
-      status: DeliveryStatusEnum.Processing,
+      status: DeliveryStatusEnum.PROCESSING,
+      deliveryDate: '24 Mei 2025',
+    },
+  },
+  {
+    id: '5',
+    storeName: 'Ichsan Electronics',
+    storeLogoUrl: 'https://ik.imagekit.io/dianerdiana/bluee-marketplace/logo/logo-store.png',
+    transactionDate: '21 Mei 2025',
+    totalProduct: 240,
+    totalQuantity: 1650,
+    grandTotal: 3200650,
+    transactionDelivery: {
+      transactionId: '4',
+      status: DeliveryStatusEnum.CANCELED,
       deliveryDate: '24 Mei 2025',
     },
   },
 ];
 
 const badgeColors: Record<DeliveryStatusType, keyof typeof badgevariants> = {
-  [DeliveryStatusEnum.Processing]: 'light-primary',
-  [DeliveryStatusEnum.Delivering]: 'light-warning',
-  [DeliveryStatusEnum.Pending]: 'yellow',
-  [DeliveryStatusEnum.Completed]: 'light-success',
+  [DeliveryStatusEnum.PROCESSING]: 'light-primary',
+  [DeliveryStatusEnum.DELIVERING]: 'light-warning',
+  [DeliveryStatusEnum.PENDING]: 'yellow',
+  [DeliveryStatusEnum.COMPLETED]: 'light-success',
+  [DeliveryStatusEnum.CANCELED]: 'light-danger',
 };
 
 const TransactionListPage = () => {
   return (
     <Container>
-      <Card>
+      <Card className='p-5'>
         <h2 className='text-xl font-bold mb-2'>All Transactions</h2>
         <div className='flex shrink-0 items-center mb-6'>
           <DynamicIcon name='Stickynote' className='me-1.5 text-secondary' />
@@ -192,10 +213,14 @@ const TransactionListPage = () => {
                       <span className='font-semibold text-base me-1.5 lg:inline hidden'>Export</span>
                       <DynamicIcon name='ReceiveSquare' size={24} />
                     </Button>
-                    <Button variant='primary' className='flex items-center px-4 py-3 rounded-2xl'>
+                    <ButtonLink
+                      href={`/transactions/${transaction.id}/details`}
+                      variant='primary'
+                      className='flex items-center px-4 py-3 rounded-2xl'
+                    >
                       <DynamicIcon name='Eye' size={24} />
                       <span className='font-semibold text-base lg:inline hidden ms-1.5'>Details</span>
-                    </Button>
+                    </ButtonLink>
                   </Col>
                 </Row>
               </Card>

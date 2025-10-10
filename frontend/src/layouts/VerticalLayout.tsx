@@ -31,6 +31,7 @@ const VerticalLayout = memo(() => {
 
   const linkTitle = currentMatch?.handle?.title ?? 'Default Title';
   const linkDescription = currentMatch?.handle?.description ?? 'Default Description';
+  const linkBefore = currentMatch?.handle?.link ?? null;
 
   const toggleSideNav = () => setSidenavOpen((prev) => !prev);
 
@@ -73,7 +74,14 @@ const VerticalLayout = memo(() => {
               </div>
               <div className='hidden lg:block'>
                 <h1 className='font-dark font-bold lg:text-2xl text-lg'>{linkTitle}</h1>
-                <p className='text-secondary lg:text-base font-semibold text-sm'>{linkDescription}</p>
+                {linkBefore ? (
+                  <Link to={linkBefore} className='flex items-center'>
+                    <DynamicIcon name='ArrowLeft' className='me-1 text-secondary' />
+                    <span className='text-secondary lg:text-base font-semibold text-sm'>{linkDescription}</span>
+                  </Link>
+                ) : (
+                  <p className='text-secondary lg:text-base font-semibold text-sm'>{linkDescription}</p>
+                )}
               </div>
               <div className='gap-x-2 flex'>
                 <Button variant='light-secondary' className='rounded-full lg:p-3 p-2'>
@@ -134,7 +142,7 @@ const NavMenuLink: React.FC<NavigationItem & { isChild: boolean }> = ({
         {({ isActive }) => (
           <div
             className={cn(
-              'flex relative items-center px-4 py-3 rounded-2xl group hover:bg-slate-primary transition-all duration-200',
+              'flex relative overflow-hidden items-center px-4 py-3 rounded-2xl group hover:bg-slate-primary transition-all duration-200',
               isActive && 'bg-slate-primary',
             )}
           >
@@ -154,10 +162,9 @@ const NavMenuLink: React.FC<NavigationItem & { isChild: boolean }> = ({
             </span>
 
             <span
-              className={cn(
-                'absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl rounded-e-md bg-primary',
-                { 'opacity-100': isActive },
-              )}
+              className={cn('absolute opacity-0 group-hover:opacity-100 right-0 w-2 h-8 rounded-s-4xl bg-primary', {
+                'opacity-100': isActive,
+              })}
             />
           </div>
         )}

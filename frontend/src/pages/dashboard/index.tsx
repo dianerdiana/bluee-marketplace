@@ -27,7 +27,7 @@ const DashboardPage = () => {
     <Container>
       <Row className='gap-y-5 lg:gap-0 mb-5'>
         <Col lg={6} sm={12}>
-          <Card>
+          <Card className='p-5'>
             <Badge variant='light-primary' className='p-3 mb-6 rounded-full'>
               <DynamicIcon name='Wallet' variant='Bold' size={24} />
             </Badge>
@@ -39,7 +39,7 @@ const DashboardPage = () => {
           </Card>
         </Col>
         <Col lg={6} sm={12}>
-          <Card>
+          <Card className='p-5'>
             <Badge variant='light-primary' className='p-3 mb-6 rounded-full'>
               <DynamicIcon name='ShoppingCart' variant='Bold' size={24} />
             </Badge>
@@ -52,7 +52,7 @@ const DashboardPage = () => {
         </Col>
       </Row>
 
-      <Card>
+      <Card className='p-5'>
         <Badge variant='light-primary' className='p-3 mb-6 rounded-full'>
           <DynamicIcon name='Stickynote' variant='Bold' size={24} />
         </Badge>

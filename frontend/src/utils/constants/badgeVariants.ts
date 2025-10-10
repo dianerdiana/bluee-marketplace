@@ -9,5 +9,6 @@ export const badgevariants = {
   'light-pink': 'bg-pink-100 text-pink-500',
   'light-warning': 'bg-slate-warning text-warning',
   'light-success': 'bg-slate-success text-success',
+  'light-danger': 'bg-red-200 text-red-500',
   outline: 'border border-back text-gray-700',
 };

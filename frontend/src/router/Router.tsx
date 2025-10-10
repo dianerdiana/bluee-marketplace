@@ -29,6 +29,7 @@ const ProductDetailPage = lazy(() => import('../pages/products/details'));
 // Dashboard
 const DashboardPage = lazy(() => import('../pages/dashboard'));
 const TransactionsListPage = lazy(() => import('../pages/transactions/list'));
+const TransactionsDetailPage = lazy(() => import('../pages/transactions/details'));
 
 export const router = createBrowserRouter([
   {
@@ -73,6 +74,15 @@ export const router = createBrowserRouter([
             handle: {
               title: 'Manage Transactions',
               description: 'View & Update Your Transactions',
+            } satisfies RouteHandle,
+          },
+          {
+            path: '/transactions/:transactionId/details',
+            Component: TransactionsDetailPage,
+            handle: {
+              title: 'Transaction Details',
+              description: 'Manage Transactions',
+              link: '/transactions',
             } satisfies RouteHandle,
           },
         ],

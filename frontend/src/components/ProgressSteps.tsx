@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 type Step = {
   label: string;
   number: number | string;
+  value: string;
 };
 
 interface ProgressStepsProps {
@@ -22,12 +23,12 @@ export const ProgressSteps: React.FC<ProgressStepsProps> = ({ steps, activeStep 
             return `<span class="${className} w-4 h-1 rounded-full inline-block !bg-lime-300 mx-1"></span>`;
           },
         }}
-        slidesPerView={3} // tampil 3 step sekaligus
+        slidesPerView={3}
         modules={[Pagination]}
         initialSlide={activeStep}
       >
         {steps.map((step, index) => {
-          const isActive = index + 1 <= activeStep;
+          const isActive = index <= activeStep;
 
           return (
             <SwiperSlide key={index}>

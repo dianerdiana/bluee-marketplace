@@ -31,7 +31,7 @@ export const CardBody: React.FC<CardBodyProps> = ({ className, children, ...prop
   );
 };
 
-export const CardTitle: React.FC<CardTitleProps> = ({ className, children, tag: Tag = 'h1', ...props }) => {
+export const CardTitle: React.FC<CardTitleProps> = ({ className, children, tag: Tag = 'h2', ...props }) => {
   return (
     <Tag className={`font-bold text-xl text-dark ${className ?? ''}`} {...props}>
       {children}

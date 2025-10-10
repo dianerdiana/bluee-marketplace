@@ -9,10 +9,10 @@
   --color-back: #f3f5f9;
   --color-dark: #292d32;
   --color-secondary: #6a7686;
-  --color-warning: #FF7020;
-  --color-slate-warning: #FF702130;
-  --color-success: #00A48A;
-  --color-slate-success: #00A48A30;
+  --color-warning: #ff7020;
+  --color-slate-warning: #ff702130;
+  --color-success: #00a48a;
+  --color-slate-success: #00a48a30;
   --leading-160: 160%;
 }
 
@@ -89,4 +89,34 @@ input[type='checkbox']:checked::after {
 
 .ProductDescription > ol {
   @apply list-decimal list-inside ps-3;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.animate-fadeOut {
+  animation: fadeOut 0.2s ease-in forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
 }
