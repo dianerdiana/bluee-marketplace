@@ -1,20 +1,12 @@
 import { cn } from '@/configs/cn';
+import { alertVariants } from '@/utils/constants/alertVariants';
 
-type AlertProps = React.HTMLAttributes<HTMLDivElement> & { variant?: keyof typeof variants };
-
-const variants = {
-  primary: 'bg-primary',
-  secondary: 'bg-secondary',
-  warning: 'bg-warning',
-  success: 'bg-success',
-  danger: 'bg-red-400',
-  yellow: 'bg-yellow-400',
-};
+type AlertProps = React.HTMLAttributes<HTMLDivElement> & { variant?: keyof typeof alertVariants };
 
 export const Alert: React.FC<AlertProps> = ({ children, className, variant = 'primary', ...props }) => {
   return (
     <div
-      className={cn('relative overflow-hidden flex items-center rounded-2xl p-4', variants[variant], className)}
+      className={cn('relative overflow-hidden flex items-center rounded-2xl p-4', alertVariants[variant], className)}
       {...props}
     >
       {children}
