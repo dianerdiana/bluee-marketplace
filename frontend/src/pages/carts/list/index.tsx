@@ -194,7 +194,7 @@ const CartListPage = () => {
                 </ListMenu>
 
                 <ButtonLink
-                  href='/checkouts'
+                  href='/checkouts/3121/details'
                   variant='primary'
                   className='flex items-center rounded-2xl w-full justify-center py-4'
                 >
