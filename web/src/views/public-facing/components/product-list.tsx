@@ -17,11 +17,11 @@ type Product = {
   isInCart: boolean;
 };
 
-type ListProductProps = { arrayProducts: Product[] };
+type ProductListProps = { arrayProducts: Product[] };
 
-export default function ListProduct({ arrayProducts }: ListProductProps) {
+export default function ProductList({ arrayProducts }: ProductListProps) {
   return (
-    <div className='grid grid-cols-12 gap-5 pb-10'>
+    <div className='grid grid-cols-12 gap-5 m-0 pb-10'>
       {arrayProducts.map((product) => (
         <div key={product.id} className='lg:col-span-3 md:col-span-6 col-span-12'>
           <Card className='overflow-hidden border border-primary-foreground rounded-xl py-0 gap-0'>

@@ -3,7 +3,7 @@ import 'swiper/swiper-bundle.css';
 import AdvertisementSlide from '../components/advertisement-slide';
 import CategorySlide from '../components/category-slide';
 import SectionGroup from '../components/section-group';
-import ListProduct from '../components/product-list';
+import ProductList from '../components/product-list';
 
 const arrayCategories = [
   { id: '1', slug: 'gadget', name: 'Gadget', icon: 'Mobile', totalItems: 1294 },
@@ -155,12 +155,12 @@ export default function HomePage() {
         <AdvertisementSlide arrayAdvertisements={arrayAdvertisements} />
       </section>
 
-      <SectionGroup title='Explore High Quality Products by Category' url='/categories'>
+      <SectionGroup title='Explore High Quality Products by Category' href='/categories'>
         <CategorySlide arrayCategories={arrayCategories} />
       </SectionGroup>
 
-      <SectionGroup title='Shop Quality Picks From Top Sellers' url='/products'>
-        <ListProduct arrayProducts={arrayProducts} />
+      <SectionGroup title='Shop Quality Picks From Top Sellers' href='/products'>
+        <ProductList arrayProducts={arrayProducts} />
       </SectionGroup>
     </main>
   );

@@ -4,11 +4,11 @@ import { Button } from '@/components/ui/button';
 
 type SectionGroupProps = {
   title: string;
-  url: string;
+  href?: string;
   children: React.ReactElement;
 };
 
-export default function SectionGroup({ title, children }: SectionGroupProps) {
+export default function SectionGroup({ title, children, href }: SectionGroupProps) {
   return (
     <Container>
       <section>
@@ -16,9 +16,11 @@ export default function SectionGroup({ title, children }: SectionGroupProps) {
           <h1 className='mb-3 text-3xl font-extrabold wrap-wrap-break-words lg:flex-col-4 flex-col-12 lg:mb-0 text-dark'>
             {title}
           </h1>
-          <Button className='flex rounded-md'>
-            <span className='me-2.5'>View All</span> <Iconsax name='ArrowRight' />
-          </Button>
+          {href ? (
+            <Button className='flex rounded-md'>
+              <span className='me-2.5'>View All</span> <Iconsax name='ArrowRight' />
+            </Button>
+          ) : null}
         </div>
         {children}
       </section>
