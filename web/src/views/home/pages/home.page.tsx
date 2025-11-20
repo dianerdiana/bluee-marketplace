@@ -3,7 +3,7 @@ import 'swiper/swiper-bundle.css';
 import AddSlide from '../components/add-slide';
 import CategorySlide from '../components/category-slide';
 import SectionGroup from '../components/section-group';
-import ListProduct from '../components/list-product';
+import ListProduct from '../components/product-list';
 
 const arrayCategories = [
   { id: '1', slug: 'gadget', name: 'Gadget', icon: 'Mobile', totalItems: 1294 },
