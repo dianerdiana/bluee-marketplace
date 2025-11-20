@@ -12,7 +12,10 @@
       "@/assets/*": ["./src/assets/*"],
       "@/utils/*": ["./src/utils/*"],
       "@/types/*": ["./src/types/*"],
-      "@/navigation/*": ["./src/navigation/*"]
+      "@/navigation/*": ["./src/navigation/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/context/*": ["./src/context/*"]
     }
   }
 }
