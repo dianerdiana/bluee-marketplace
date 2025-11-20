@@ -17,7 +17,7 @@ import { Rating } from "@/components/rating"
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { ChevronLeftCircle, ChevronRightCircle, Mail } from "lucide-react"
+import { ChevronLeftCircle, ChevronRightCircle, KeyRound, Mail } from "lucide-react"
 
 export default function SignInPage() {
   const navigate = useNavigate()
@@ -74,20 +74,22 @@ export default function SignInPage() {
           </div>
         </div>
       </section>
-      <section className="flex items-center justify-center h-full lg:w-1/2">
-        <div className="bg-white px-6 py-6 flex flex-col justify-center h-11/12 lg:mx-8 mx-4 w-full rounded-[20px]">
+      <section className="flex items-center justify-center h-full w-full lg:w-1/2">
+        <div className="bg-white px-6 py-6 flex flex-col justify-center h-11/12 lg:mx-8 mx-4 w-full rounded-2xl">
           <div className="flex items-center justify-center mb-14 lg:mb-6">
             <img src={appConfig.logoUrl} className="h-auto w-11" />
-            <h1 className="text-2xl font-black font-mons">{appConfig.brandName}</h1>
+            <h1 className="text-2xl font-black font-mons text-dark">{appConfig.brandName}</h1>
           </div>
 
-          <div className="hidden mb-8 space-y-1 lg:block">
+          <div className="mb-8 space-y-1 block">
             <p className="text-xl font-bold text-center text-dark">Hey🙌🏻, Welcome Back!</p>
-            <p className="text-sm text-center text-secondary">Login to your account to continue!</p>
+            <p className="text-sm text-center text-muted-foreground">
+              Login to your account to continue!
+            </p>
           </div>
 
           <form onSubmit={handleSubmit(onSubmit)}>
-            <FieldGroup>
+            <FieldGroup className="gap-4">
               <Controller
                 name="email"
                 control={control}
@@ -111,18 +113,43 @@ export default function SignInPage() {
                   </Field>
                 )}
               />
+
+              <Controller
+                name="password"
+                control={control}
+                render={({ field, fieldState }) => (
+                  <Field data-invalid={fieldState.invalid} className="gap-2">
+                    <FieldLabel htmlFor="Password">Password</FieldLabel>
+                    <InputGroup>
+                      <InputGroupAddon>
+                        <KeyRound />
+                        <span className="w-px h-5 bg-gray-300" />
+                      </InputGroupAddon>
+                      <InputGroupInput
+                        aria-invalid={fieldState.invalid}
+                        id="Password"
+                        placeholder="Enter Your Password"
+                        {...field}
+                      />
+                    </InputGroup>
+
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+                  </Field>
+                )}
+              />
+
+              <Field orientation="vertical">
+                <Button type="submit" className="w-full rounded-full py-5">
+                  Sign In
+                </Button>
+                <p className="text-muted-foreground text-center">
+                  Don't have account?{" "}
+                  <Link to={"/signup"} className="text-primary font-semibold underline">
+                    Create Account
+                  </Link>
+                </p>
+              </Field>
             </FieldGroup>
-            <div>
-              <Button type="submit" variant="default" className="w-full py-4 mb-3 rounded-full">
-                Sign In
-              </Button>
-              <p className="text-center text-secondary">
-                Don't have an account?{" "}
-                <Link to="/signup" className="underline text-primary">
-                  Create Account
-                </Link>
-              </p>
-            </div>
           </form>
         </div>
       </section>
