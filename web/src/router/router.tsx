@@ -1,41 +1,53 @@
-import { lazy } from 'react';
-import { createBrowserRouter, redirect, type RouteObject } from 'react-router-dom';
+import { lazy } from "react"
+import { createBrowserRouter, redirect, type RouteObject } from "react-router-dom"
 
 // Layouts
-import BlankLayout from '@/layouts/blank-layout';
-import VerticalLayout from '@/layouts/vertical-layout';
-import type { AppRoute, RouteMeta } from '@/types/route.type.ts';
-import routes from './routes/index.tsx';
-import PrivateRoute from '@/components/routes/private-route.tsx';
-import PublicRoute from '@/components/routes/public-route.tsx';
+import BlankLayout from "@/layouts/blank-layout"
+import VerticalLayout from "@/layouts/vertical-layout"
+import HorizontalLayout from "@/layouts/horizontal-layout"
 
-const LazyApp = lazy(() => import('../app.tsx'));
+// Custom Components
+import PrivateRoute from "@/components/routes/private-route.tsx"
+import PublicRoute from "@/components/routes/public-route.tsx"
+
+// Routes
+import routes from "./routes/index.tsx"
+
+// Types
+import type { AppRoute, RouteMeta } from "@/types/route.type.ts"
+
+// Utils
+import { getHomeRouteForLoggedInUser } from "@/utils/utils.ts"
+
+const LazyApp = lazy(() => import("../app.tsx"))
 
 const resolveLayout = (layout?: string) => {
   switch (layout) {
-    case 'blank':
-      return BlankLayout;
-    case 'vertical':
-      return VerticalLayout;
+    case "blank":
+      return BlankLayout
+    case "vertical":
+      return VerticalLayout
+    case "horizontal":
+      return HorizontalLayout
     default:
-      return VerticalLayout;
+      return VerticalLayout
   }
-};
+}
 
 const mergeLayoutRoutes = (layout: string, defaultLayout: string): AppRoute[] => {
-  const LayoutRoutes: AppRoute[] = [];
+  const LayoutRoutes: AppRoute[] = []
 
   routes.forEach((route) => {
     const isMatch =
       (route.meta && route.meta.layout === layout) ||
       route.meta === undefined ||
-      (route.meta?.layout === undefined && defaultLayout === layout);
+      (route.meta?.layout === undefined && defaultLayout === layout)
 
     if (isMatch) {
-      let RouteTag: React.ElementType = PrivateRoute;
+      let RouteTag: React.ElementType = PrivateRoute
 
       if (route.meta) {
-        RouteTag = route.meta.publicRoute ? PublicRoute : PrivateRoute;
+        RouteTag = route.meta.publicRoute ? PublicRoute : PrivateRoute
       }
 
       if (route.element) {
@@ -45,41 +57,41 @@ const mergeLayoutRoutes = (layout: string, defaultLayout: string): AppRoute[] =>
           handle: {
             ...route.meta,
           } satisfies RouteMeta,
-        };
+        }
 
-        LayoutRoutes.push(newRoute);
+        LayoutRoutes.push(newRoute)
       }
     }
-  });
+  })
 
-  return LayoutRoutes;
-};
+  return LayoutRoutes
+}
 
 const getRoutes = () => {
-  const defaultLayout = 'vertical';
-  const layouts = ['vertical', 'blank'];
+  const defaultLayout = "vertical"
+  const layouts = ["vertical", "horizontal", "blank"]
 
-  const AllRoutes: RouteObject[] = [];
+  const AllRoutes: RouteObject[] = []
 
   layouts.forEach((layoutItem) => {
-    const LayoutRoutes = mergeLayoutRoutes(layoutItem, defaultLayout);
+    const LayoutRoutes = mergeLayoutRoutes(layoutItem, defaultLayout)
 
     AllRoutes.push({
       Component: resolveLayout(layoutItem) || resolveLayout(defaultLayout),
       children: LayoutRoutes,
-    });
-  });
-  return AllRoutes;
-};
+    })
+  })
+  return AllRoutes
+}
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     index: true,
-    loader: () => redirect('/signin'),
+    loader: () => redirect(getHomeRouteForLoggedInUser()),
   },
   {
     Component: LazyApp,
     children: [...getRoutes()],
   },
-]);
+])

@@ -1,9 +1,9 @@
 {
   "printWidth": 100,
   "trailingComma": "all",
-  "semi": false,
-  "singleQuote": false,
+  "semi": true,
+  "singleQuote": true,
   "tabWidth": 2,
   "htmlWhitespaceSensitivity": "ignore",
-  "jsxSingleQuote": false
+  "jsxSingleQuote": true
 }
