@@ -101,7 +101,7 @@ export default function HorizontalLayout() {
   return (
     <Suspense fallback={null}>
       <header className='py-4 bg-white lg:py-8'>
-        <Container className='px-0 mb-6'>
+        <Container className='mb-6'>
           <Row className='items-center justify-center'>
             <Col sm={6} lg={2} className='order-1'>
               <Link to={'/home'}>
@@ -126,7 +126,7 @@ export default function HorizontalLayout() {
                   variant='secondary'
                   className='flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full text-dark hover:text-white hover:bg-gray-400'
                 >
-                  <Iconsax name='Notification' size={24} />
+                  <Iconsax name='Notification' />
                 </Button>
                 <Link
                   to='/carts'
@@ -147,7 +147,7 @@ export default function HorizontalLayout() {
             </Col>
           </Row>
         </Container>
-        <Container className='lg:px-0'>
+        <Container>
           <nav>
             <Swiper
               tag='ul'

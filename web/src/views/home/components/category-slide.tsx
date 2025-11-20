@@ -2,7 +2,6 @@ import { Iconsax } from '@/components/iconsax';
 import type { IconsaxName } from '@/types/iconsax-names';
 import { formatThousandNumber } from '@/utils/utils';
 import { Link } from 'react-router-dom';
-import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Category = {
@@ -15,7 +14,7 @@ type Category = {
 
 export default function CategorySlide({ arrayCategories }: { arrayCategories: Category[] }) {
   return (
-    <Swiper loop pagination spaceBetween={32} slidesPerView='auto' modules={[Pagination]} tag='ul'>
+    <Swiper loop spaceBetween={32} slidesPerView='auto' tag='ul'>
       {arrayCategories.map((category) => (
         <SwiperSlide key={category.id} className='max-w-[180px]' tag='li'>
           <Link

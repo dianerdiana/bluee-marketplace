@@ -3,7 +3,7 @@ import 'swiper/swiper-bundle.css';
 import AddSlide from '../components/add-slide';
 import CategorySlide from '../components/category-slide';
 import SectionGroup from '../components/section-group';
-import CardProduct from '../components/card-product';
+import ListProduct from '../components/list-product';
 
 const arrayCategories = [
   { id: '1', slug: 'gadget', name: 'Gadget', icon: 'Mobile', totalItems: 1294 },
@@ -151,7 +151,7 @@ const arrayProducts = [
 export default function HomePage() {
   return (
     <main className='bg-white'>
-      <section className='py-4 lg:py-8 bg-primary-foreground'>
+      <section className='pt-4 pb-1 lg:pt-8 lg:pb-4 bg-primary-foreground'>
         <AddSlide arrayAdds={arrayAdds} />
       </section>
 
@@ -160,13 +160,7 @@ export default function HomePage() {
       </SectionGroup>
 
       <SectionGroup title='Shop Quality Picks From Top Sellers' url='/products'>
-        <div className='grid grid-cols-12 gap-6 pb-10'>
-          {arrayProducts.map((product) => (
-            <div key={product.id} className='lg:col-span-3 md:col-span-6 col-span-12'>
-              <CardProduct product={product} />
-            </div>
-          ))}
-        </div>
+        <ListProduct arrayProducts={arrayProducts} />
       </SectionGroup>
     </main>
   );

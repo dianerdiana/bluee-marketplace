@@ -136,3 +136,9 @@
     rgba(14, 22, 38, 1) 100%
   );
 }
+
+.swiper-pagination {
+  position: static !important; /* biar nggak absolute */
+  margin-top: 6px; /* kasih jarak manual */
+  text-align: center; /* biar tengah */
+}
