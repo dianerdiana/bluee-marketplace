@@ -1,4 +1,4 @@
-import { AuthRoute } from "./auth-route"
-import { HomeRoute } from "./home-route"
+import { AuthRoute } from './auth-route';
+import { HomeRoute } from './public-facing-route';
 
-export default [...AuthRoute, ...HomeRoute]
+export default [...AuthRoute, ...HomeRoute];

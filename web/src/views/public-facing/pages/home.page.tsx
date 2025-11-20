@@ -1,6 +1,6 @@
 // Import Swiper styles
 import 'swiper/swiper-bundle.css';
-import AddSlide from '../components/add-slide';
+import AdvertisementSlide from '../components/advertisement-slide';
 import CategorySlide from '../components/category-slide';
 import SectionGroup from '../components/section-group';
 import ListProduct from '../components/product-list';
@@ -14,7 +14,7 @@ const arrayCategories = [
   { id: '6', slug: 'kitchen', name: 'Kitchen', icon: 'Cup', totalItems: 1294 },
 ];
 
-const arrayAdds = [
+const arrayAdvertisements = [
   {
     id: '1',
     href: '/home',
@@ -152,7 +152,7 @@ export default function HomePage() {
   return (
     <main className='bg-white'>
       <section className='pt-4 pb-1 lg:pt-8 lg:pb-4 bg-primary-foreground'>
-        <AddSlide arrayAdds={arrayAdds} />
+        <AdvertisementSlide arrayAdvertisements={arrayAdvertisements} />
       </section>
 
       <SectionGroup title='Explore High Quality Products by Category' url='/categories'>
