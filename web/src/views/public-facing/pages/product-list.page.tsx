@@ -1,10 +1,6 @@
 // Routing
 import { useSearchParams } from 'react-router-dom';
 
-// Custom Components
-
-// Types
-
 // Utils
 import { formatThousandNumber } from '@/utils/utils';
 import {
@@ -21,19 +17,7 @@ import ProductList from '../components/product-list';
 import { Container } from '@/components/container';
 import SectionGroup from '../components/section-group';
 
-type Product = {
-  id: string;
-  slug: string;
-  name: string;
-  imageUrl: string;
-  category: string;
-  totalSold: number;
-  price: number;
-  isLiked: boolean;
-  isInCart: boolean;
-};
-
-const popularProducts: Product[] = [
+const popularProducts = [
   {
     id: '1',
     slug: 'iphone-14-pro-green',
@@ -124,7 +108,7 @@ const popularProducts: Product[] = [
   },
 ];
 
-const justReleasedProducts: Product[] = [
+const justReleasedProducts = [
   {
     id: '1',
     slug: 'airpods-gen-z-2025',
@@ -233,7 +217,7 @@ export default function ProductListPage() {
   return (
     <main>
       <Container>
-        <section className='flex flex-col justify-center py-14  gap-y-3'>
+        <section className='flex flex-col justify-center py-14 gap-y-3'>
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -250,7 +234,7 @@ export default function ProductListPage() {
           <h1 className='text-3xl font-extrabold flex-col-12'>
             Explore based on <span className='capitalize'>{category}</span> Category
           </h1>
-          <div className='gap-4 flex'>
+          <div className='gap-4 flex flex-wrap'>
             <div className='flex items-center'>
               <Iconsax name='Box' size={20} className='text-muted-foreground me-1.5' />
               <span className='font-semibold text-muted-foreground'>
@@ -266,21 +250,19 @@ export default function ProductListPage() {
       </Container>
 
       <div className='bg-white'>
-        <Container>
-          <SectionGroup title='Popular Products 🔥'>
-            <div className='space-y-8'>
-              <ProductList arrayProducts={popularProducts} />
-              <LoadMoreButton />
-            </div>
-          </SectionGroup>
+        <SectionGroup title='Popular Products 🔥'>
+          <div className='space-y-8'>
+            <ProductList arrayProducts={popularProducts} />
+            <LoadMoreButton />
+          </div>
+        </SectionGroup>
 
-          <SectionGroup title='Just Released 🙌🏻'>
-            <div className='space-y-8 pb-10'>
-              <ProductList arrayProducts={justReleasedProducts} />
-              <LoadMoreButton />
-            </div>
-          </SectionGroup>
-        </Container>
+        <SectionGroup title='Just Released 🙌🏻'>
+          <div className='space-y-8 pb-10'>
+            <ProductList arrayProducts={justReleasedProducts} />
+            <LoadMoreButton />
+          </div>
+        </SectionGroup>
       </div>
     </main>
   );

@@ -142,3 +142,11 @@
   margin-top: 6px; /* kasih jarak manual */
   text-align: center; /* biar tengah */
 }
+
+.product__description > ul {
+  @apply list-disc list-inside ps-3;
+}
+
+.product__description > ol {
+  @apply list-decimal list-inside ps-3;
+}

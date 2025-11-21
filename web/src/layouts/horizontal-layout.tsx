@@ -115,7 +115,11 @@ export default function HorizontalLayout() {
                     <InputGroupAddon>
                       <Iconsax name='SearchNormal' />
                     </InputGroupAddon>
-                    <InputGroupInput id='search' placeholder='Search any products' />
+                    <InputGroupInput
+                      id='search'
+                      placeholder='Search any products'
+                      onChange={(e) => setSearchParams({ search: e.target.value })}
+                    />
                   </InputGroup>
                 </Field>
               </form>
@@ -123,10 +127,11 @@ export default function HorizontalLayout() {
             <Col sm={6} lg={2} className='lg:order-3 order-2'>
               <div className='flex items-center justify-end gap-2 lg:gap-3'>
                 <Button
+                  size='icon-lg'
                   variant='secondary'
                   className='flex items-center justify-center w-10 h-10 bg-gray-200 rounded-full text-dark hover:text-white hover:bg-gray-400'
                 >
-                  <Iconsax name='Notification' />
+                  <Iconsax name='Notification' className='size-6' />
                 </Button>
                 <Link
                   to='/carts'
