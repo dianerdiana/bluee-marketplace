@@ -1,5 +1,5 @@
 import { Rating } from '@/components/rating';
-import { Pagination } from 'swiper/modules';
+import { FreeMode, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 type Testimony = {
@@ -16,10 +16,15 @@ export default function ProductTestimonySlide(props: ProductTestimonySlideProps)
   const { arrayProductTestimonials } = props;
 
   return (
-    <section>
+    <section className='overflow-hidden'>
       <h3 className='mb-6 text-lg font-bold'>Product Testimony</h3>
-
-      <Swiper freeMode pagination spaceBetween={16} slidesPerView='auto' modules={[Pagination]}>
+      <Swiper
+        freeMode
+        pagination
+        spaceBetween={16}
+        slidesPerView='auto'
+        modules={[Pagination, FreeMode]}
+      >
         {arrayProductTestimonials.map((testimony) => (
           <SwiperSlide key={testimony.id} className='w-full max-w-72'>
             <div className='p-5 border border-back rounded-2xl'>

@@ -23,7 +23,7 @@ import ProductDetail from '../components/product-detail';
 import Store from '../components/store';
 import LandscapeAdvertisementSlide from '../components/landscape-advertisement-slide';
 import ProductAbout from '../components/product-about';
-import ProductTestimonySlide from '../components/product-testimony';
+import ProductTestimonySlide from '../components/product-testimony-slide';
 
 const arrayProducts = [
   {

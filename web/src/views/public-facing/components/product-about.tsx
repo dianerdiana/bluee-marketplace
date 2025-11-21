@@ -12,7 +12,7 @@ export default function ProductAbout({ description }: ProductAboutProps) {
     <section>
       <h3 className='mb-3 font-bold'>Product About</h3>
       <div
-        className={`product__description text-justify text-muted-foreground font-medium ${
+        className={`product__description text-muted-foreground font-medium ${
           lessDescription ? 'line-clamp-6' : ''
         }`}
       >

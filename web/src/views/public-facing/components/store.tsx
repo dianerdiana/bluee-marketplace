@@ -10,7 +10,7 @@ type StoreProps = {
 
 export default function Store({ name, totalProducts, slug, thumbnail }: StoreProps) {
   return (
-    <section className='flex items-center justify-between p-5 mt-10 border border-back rounded-2xl w-full'>
+    <section className='flex flex-wrap items-center justify-between p-5 mt-10 border border-back rounded-2xl w-full'>
       <div className='flex items-center'>
         <div className='overflow-hidden rounded-full w-14 h-14 me-4'>
           <img src={thumbnail} alt='Store Logo' className='object-contain w-full h-full' />
@@ -28,7 +28,7 @@ export default function Store({ name, totalProducts, slug, thumbnail }: StorePro
       <Link
         to={`/stores/${slug}/detail`}
         title='Visit Store'
-        className='font-semibold text-center lg:text-end text-primary w-fit'
+        className='font-semibold text-center lg:text-end text-primary w-fit mt-4 lg:mt-0'
       >
         Visit Store
       </Link>
