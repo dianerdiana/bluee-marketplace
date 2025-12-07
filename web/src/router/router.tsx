@@ -19,7 +19,7 @@ import type { AppRoute, RouteMeta } from "@/types/route.type.ts"
 // Utils
 import { getHomeRouteForLoggedInUser } from "@/utils/utils.ts"
 
-const LazyApp = lazy(() => import("../app.tsx"))
+const LazyApp = lazy(() => import("../App.tsx"))
 
 const resolveLayout = (layout?: string) => {
   switch (layout) {
